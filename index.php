@@ -1,8 +1,11 @@
 <?php
 
-require_once 'routing.php';
+require_once 'core/Controller.php';
+require_once 'core/Routing.php';
+
 require_once 'controllers/ConsoleController.php';
 require_once 'controllers/IndexController.php';
+
 /*
 function __autoload($className) {
 	echo $className;

@@ -1,6 +1,10 @@
 <?php
 
-class ConsoleController {
+class ConsoleController extends Controller {
+
+ 	public function __construct() {
+        
+    }
 
 	public function indexAction($request = null)
 	{
