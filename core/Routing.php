@@ -16,12 +16,17 @@ class Routing {
 		$args = $path;
 
 		if($controller == "Controller" && $action == "Action"){
+			
 			$controller = new IndexController();
 			$controller->indexAction($args);
 		}else{
-			$controller = new $controller();
-			$controller->$action($args);
-	
+
+			if(class_exists($controller)){
+				$controller = new $controller();
+				$controller->$action($args);
+			}else{
+				die('controller not found');
+			}
 		}
 		
 	}

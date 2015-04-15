@@ -8,7 +8,8 @@ class ConsoleController extends Controller {
 
 	public function indexAction($request = null)
 	{
-		var_dump($request);
+		$foo = Console::getInstance()->fetchEntry(1);
+		var_dump($foo);
 		die('ConsoleController/Index');
 	}
 
