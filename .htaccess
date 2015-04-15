@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_URI} !/CURL
+RewriteCond %{SCRIPT_URI} !/XML
+
+RewriteRule ^.*$ ./index.php [L]
