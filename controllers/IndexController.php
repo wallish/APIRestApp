@@ -8,13 +8,12 @@ class IndexController extends Controller {
 
 	public function indexAction()
 	{
-		/*$db = new Database();
-		$db->init();
-		$foo = $db->fetchEntry();*/
+		
+		$foo = User::getInstance()->fetchEntry('username','foobar');
+		
+		echo "<pre>";
+		var_dump($foo);
 
-		
-		
-		var_dump($_REQUEST);
 		die('IndexController/Index');
 	}
 

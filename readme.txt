@@ -23,3 +23,4 @@ Interface :
 > json_encode / decode
 > check le http code == 201 if created
 > retourner le bon http code en cas d'erreura
+> $_server request_method

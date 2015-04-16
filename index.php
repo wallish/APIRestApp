@@ -6,8 +6,9 @@ require_once 'core/Database.php';
 require_once 'core/Model.php';
 require_once 'core/Security.php';
 require_once 'models/Game.php';
+require_once 'models/User.php';
 
-require_once 'controllers/ConsoleController.php';
+require_once 'controllers/GameController.php';
 require_once 'controllers/IndexController.php';
 
 /*
@@ -20,5 +21,6 @@ function __autoload($className) {
 } */
 #@TODO : autoloader
 
-//Security::verify();
+Security::verify();
 Routing::parseURI();
+
