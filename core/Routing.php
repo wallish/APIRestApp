@@ -16,9 +16,9 @@ class Routing {
 		$args = $path;
 
 		if($controller == "Controller" && $action == "Action"){
-			
-			$controller = new IndexController();
-			$controller->indexAction($args);
+
+		    $controller = new IndexController();
+		    $controller->indexAction($args);
 		}else{
 
 			if(class_exists($controller)){

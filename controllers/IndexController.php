@@ -14,7 +14,7 @@ class IndexController extends Controller {
 
 		
 		
-		var_dump($foo);
+		var_dump($_REQUEST);
 		die('IndexController/Index');
 	}
 

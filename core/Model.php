@@ -7,7 +7,6 @@ class Model extends Database
     public function __construct()
     {
         self::$adapter = Database::getInstance();
-       
     }
 
     public function getAdapter()
