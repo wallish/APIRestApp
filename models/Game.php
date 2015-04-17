@@ -28,26 +28,26 @@ class Game extends Model
 
    public function fetchEntry($field, $search)
    { 
-        //die(var_dump($filters));
-        $args = func_get_args();
-        array_shift($args);
-      
         $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table.' where '.$field.' = :'.$field);
         $reponse->execute(array(':'.$field => $search));
 
         return $reponse->fetchAll();
-       //return $reponse;
     }
 
     public function fetchAll($query = null)
     { 
-        $args = func_get_args();
-        array_shift($args);
-       
         $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table);
         $reponse->execute();
 
         return $reponse->fetchAll();
-       //return $reponse;
     }
+
+    public function delete($id)
+    { 
+       /* $reponse = $this->getAdapter()->prepare('DELETE * FROM '.$this->table' where id = :id ');
+        $reponse->execute(array(':id'=> $id));
+
+        return $reponse->fetchAll();*/
+    }
+
 }

@@ -26,7 +26,7 @@ class Database extends PDO {
 
     public function query($query){ 
         $args = func_get_args();
-        array_shift($args); //first element is not an argument but the query itself, should removed
+        array_shift($args); 
 
         $reponse = parent::prepare($query);
         $reponse->execute($args);

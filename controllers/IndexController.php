@@ -13,7 +13,7 @@ class IndexController extends Controller {
 		
 		echo "<pre>";
 		var_dump($foo);
-
+var_dump($_SERVER);
 		die('IndexController/Index');
 	}
 
