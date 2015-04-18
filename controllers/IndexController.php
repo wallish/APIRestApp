@@ -1,20 +1,19 @@
 <?php
 
-class IndexController extends Controller {
-
-	public function __construct() {
-        
+class IndexController extends Controller
+{
+    public function __construct()
+    {
     }
 
-	public function indexAction()
-	{
-		
-		$foo = User::getInstance()->fetchEntry('username','foobar');
-		
-		echo "<pre>";
-		var_dump($foo);
-var_dump($_SERVER);
-		die('IndexController/Index');
-	}
+    public function indexAction()
+    {
+        $foo = User::getInstance()->fetchEntry('username', 'foobar');
+        $game = Game::getInstance()->save(array());
 
+        var_dump($game);
+        echo '<pre>';
+
+        die('IndexController/Index');
+    }
 }

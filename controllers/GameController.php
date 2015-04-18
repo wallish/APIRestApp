@@ -1,54 +1,50 @@
 <?php
 
-class GameController extends Controller {
-
- 	public function __construct() {
-        
+class GameController extends Controller
+{
+    public function __construct()
+    {
     }
 
-	public function indexAction($request = null)
-	{
-				
-		var_dump($_REQUEST);
-		die('GameController/Index');
-	}
+    public function indexAction($request = null)
+    {
+        $game = Game::getInstance()->save(array());
 
-	public function testAction()
-	{
-		die('GameController/Test');
-	}
+        var_dump($game);
+        die('GameController/Index');
+    }
 
-	public function addAction()
-	{
-		if($_SERVER['REQUEST_METHOD'] == 'POST')
-		{
-			var_dump($_REQUEST);
-		}
+    public function testAction()
+    {
+        die('GameController/Test');
+    }
 
-		die('GameController/add');
-	}
+    public function addAction()
+    {
+        if (Request::isPost()) {
+            var_dump($_REQUEST);
+        }
 
-	public function deleteAction()
-	{
-		if($_SERVER['REQUEST_METHOD'] == 'DELETE')
-		{
-			parse_str(file_get_contents("php://input"), $post_content);
-			var_dump($put_content);
-		}
+        die('GameController/add');
+    }
 
-		die('GameController/delete');
-	}
+    public function deleteAction()
+    {
+        if (Request::isDelete()) {
+            parse_str(file_get_contents('php://input'), $post_content);
+            var_dump($put_content);
+        }
 
-	public function updateAction()
-	{
-		if($_SERVER['REQUEST_METHOD'] == 'PUT')
-		{
-			parse_str(file_get_contents("php://input"), $post_content);
-			var_dump($put_content);
-		}
+        die('GameController/delete');
+    }
 
-		die('GameController/udpate');
-	}
+    public function updateAction()
+    {
+        if (Request::isPut()) {
+            parse_str(file_get_contents('php://input'), $post_content);
+            var_dump($put_content);
+        }
 
-
+        die('GameController/update');
+    }
 }

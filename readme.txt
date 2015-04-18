@@ -2,7 +2,8 @@
 -> 3 jeux en BDD
 2ème étape : Conception du fichier XML
 3ème étape : Validation avec le sxd
-
+étape intermédiaire : lorsque l'on fait un get on ne va pas génerer tout le XML
+-> trouver une solution pour ne pas avoir de redondance dans le schema xsd
 API :
 > Routing
 > Liaison avec PDO

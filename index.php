@@ -1,26 +1,17 @@
 <?php
 
-require_once 'core/Controller.php';
-require_once 'core/Routing.php';
-require_once 'core/Database.php';
-require_once 'core/Model.php';
-require_once 'core/Security.php';
-require_once 'models/Game.php';
-require_once 'models/User.php';
-
-require_once 'controllers/GameController.php';
-require_once 'controllers/IndexController.php';
-
-/*
-function __autoload($className) {
-	echo $className;
-      if (file_exists($className . '.php') || file_exists('controllers/'.$className . '.php')) {
-          require_once $className . '.php';
-          
-      }      
-} */
-#@TODO : autoloader
+function __autoload($className)
+{
+    if (file_exists($className.'.php')) {
+        require_once $className.'.php';
+    } elseif (file_exists('controllers/'.$className.'.php')) {
+        require_once 'controllers/'.$className.'.php';
+    } elseif (file_exists('core/'.$className.'.php')) {
+        require_once 'core/'.$className.'.php';
+    } elseif (file_exists('models/'.$className.'.php')) {
+        require_once 'models/'.$className.'.php';
+    }
+}
 
 Security::verify();
 Routing::parseURI();
-
