@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<!-- EDITEURS -->
+
+	<!-- schema d'un editeur -->
+	<xsd:element name="editeur">
+		<xsd:complexType>
+    		<xsd:sequence>
+            	<xsd:element name="nom" type="xsd:string" />
+            	<xsd:element name="anneeCreation" type="xsd:gYear" />
+            	<xsd:element name="pays" type="xsd:string" />
+				<xsd:element name="sitewebediteur" type="xsd:string" />
+				<xsd:element name="fondateur" type="xsd:string" />
+            </xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- Schema de la liste d'editeurs -->
+	<xsd:element name="editeurs">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="editeur" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- FIN EDITEURS -->
+
+	<!-- CONSOLE -->
+
+	<xsd:element name="caracteristiques">
+		<xsd:complexType>
+    		<xsd:sequence>
+            	<xsd:element name="cpu" type="xsd:string" />
+            	<xsd:element name="gpu" type="xsd:string" />
+            	<xsd:element name="ram" type="xsd:string" />
+				<xsd:element name="poids" type="xsd:string" />
+				<xsd:element name="lecteurOptique" type="xsd:string" />
+				<xsd:element name="supportVideo" type="xsd:string" />
+				<xsd:element name="bluetooth" type="xsd:string" />
+				<xsd:element name="wifi" type="xsd:string" />
+				<xsd:element name="portUsb" type="xsd:string" />
+				<xsd:element name="manette" type="xsd:string" />
+				<xsd:element name="alimentation" type="xsd:string" />
+				<xsd:element name="stockage" type="xsd:string" />
+            </xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="media">
+	    <xsd:complexType>
+	        <xsd:attribute name="type" type="xsd:string" />
+	    </xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="medias">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="media" maxOccurs="unbounded" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="commentaire">
+		<xsd:complexType>
+    		<xsd:sequence>
+    			<xsd:element name="utilisateur" type="xsd:string" />
+    			<xsd:element name="date" type="xsd:date" />
+    			<xsd:element name="note" type="xsd:nonNegativeInteger" />
+    			<xsd:element name="contenu" type="xsd:string" />
+			</xsd:sequence>	
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="commentaires">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="commentaire" maxOccurs="unbounded" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="prixJeu">
+	    <xsd:complexType>
+	        <xsd:simpleContent>
+	            <xsd:extension base="xsd:float">
+	                <xsd:attribute name="devise" type="xsd:string" use="required" />
+	            </xsd:extension>
+	        </xsd:simpleContent>
+	    </xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="prix">
+	    <xsd:complexType>
+	        <xsd:simpleContent>
+	            <xsd:extension base="xsd:float">
+	                <xsd:attribute name="devise" type="xsd:string" use="required"/>
+	            </xsd:extension>
+	        </xsd:simpleContent>
+	    </xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="console">
+		<xsd:complexType>
+			<xsd:all>
+            	<xsd:element name="nomConsole" type="xsd:string"/>
+            	<xsd:element name="dateDeSortie" type="xsd:date"/>
+            	<xsd:element ref="prixJeu" />
+            	<xsd:element ref="prix" />
+            	<xsd:element ref="caracteristiques" />
+            	<xsd:element ref="medias" />
+            	<xsd:element ref="commentaires" minOccurs="0" />
+        	</xsd:all>
+        	<xsd:attribute name="dateSortieJeu" type="xsd:date" />
+        	<xsd:attribute name="classification" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="consoles">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="console" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- FIN CONSOLE -->
+
+	<xsd:element name="genres">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="genre" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="themes">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="theme" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="supports">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="support" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="modes">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="mode" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- JEU -->
+
+	<xsd:element name="jeu">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="titre" type="xsd:string" />
+				<xsd:element ref="editeurs" />
+				<xsd:element name="description" type="xsd:string" />
+				<xsd:element name="siteweb" type="xsd:string" />
+				<xsd:element ref="consoles" />
+				<xsd:element ref="genres" />
+				<xsd:element ref="themes" />
+				<xsd:element ref="supports" />
+				<xsd:element ref="modes" />
+			</xsd:sequence>
+			<xsd:attribute name="jeuId" type="xsd:positiveInteger" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- FIN JEU -->
+
+	<xsd:element name="catalogue">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="jeu" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+
+
+	
+
+</xsd:schema>

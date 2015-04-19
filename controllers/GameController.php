@@ -4,13 +4,15 @@ class GameController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
     }
 
     public function indexAction($request = null)
     {
         $game = Game::getInstance()->save(array());
 
-        var_dump($game);
+        $this->getView()->set('foo', 'bar');
+        $this->getView()->render('game/index');
         die('GameController/Index');
     }
 

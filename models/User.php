@@ -27,13 +27,10 @@ class User extends Model
         return self::$instance;
     }
 
-    public function fetchEntry($field, $search)
+    public function fetchEntry(array $filter)
     {
-        $args = func_get_args();
-        array_shift($args);
-
-        $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table.' where '.$field.' = :'.$field);
-        $reponse->execute(array(':'.$field => $search));
+        $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table.' where '.$filter['field'].' = :'.$filter['field']);
+        $reponse->execute(array(':'.$filter['field'] => $filter['search']));
 
         return $reponse->fetchAll();
     }
