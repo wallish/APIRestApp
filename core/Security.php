@@ -16,7 +16,7 @@ class Security
         $hosthttp = $_SERVER['HTTP_HOST'];
 
         // db
-        $user = User::getInstance()->fetchEntry('username', $userhttp);
+        $user = User::getInstance()->fetchEntry(['field' => 'username', 'search' => $userhttp]);
 
         if (!$user) {
             die('user missing');

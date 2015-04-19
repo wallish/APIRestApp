@@ -10,6 +10,7 @@ class IndexController extends Controller
     public function indexAction()
     {
         $foo = User::getInstance()->fetchAll();
+        
 
         $this->getView()->render('index/index', ['users' => $foo]);
 

@@ -1,6 +1,6 @@
 <?php
 
-$user = 'foobar';
+$user = 'nirun';
 $api = 'bar';
 $api_secret = 'foo';
 $id = '1';
@@ -9,12 +9,12 @@ $sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
 
 // ouverture de la connection
 $ch = curl_init();
-$url = 'localhost/api/game/update/';
+$url = 'localhost/api/user/update/';
 
 // set post
 $fields = array(
-                'id' => urlencode('id'),
-                'password' => urlencode('update'),
+                'id' => 9,
+                'password' => 'update',
             );
 
 // set les options

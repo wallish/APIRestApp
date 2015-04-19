@@ -18,6 +18,11 @@ class User extends Model
         return self::$adapter;
     }
 
+    public function getTable()
+    {
+        return $this->table;
+    }
+
     public static function getInstance()
     {
         if (is_null(self::$instance)) {
@@ -45,4 +50,5 @@ class User extends Model
 
         return $reponse->fetchAll();
     }
+
 }

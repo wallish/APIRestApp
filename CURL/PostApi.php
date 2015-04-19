@@ -9,11 +9,12 @@ $sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
 
 // ouverture de la connection
 $ch = curl_init();
-$url = 'localhost/api/game/add/';
+$url = 'localhost/api/user/add/';
 
 // set post
 $fields = array(
-                'name' => urlencode('toto'),
+                'username' => urlencode('nirun'),
+                'password' => urlencode('than'),
             );
 
 // set les options
