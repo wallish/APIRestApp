@@ -2,10 +2,10 @@
 
 class Database extends PDO
 {
-    const  PARAM_HOST = 'localhost';
-    const  PARAM_DB = 'api';
-    const  PARAM_USER = 'root';
-    const  PARAM_PASSWORD = '';
+    const  PARAM_HOST = DATABASE_HOST;
+    const  PARAM_DB = DATABASE_DB;
+    const  PARAM_USER = DATABASE_USER;
+    const  PARAM_PASSWORD = DATABASE_PASSWORD;
     private static $instance = null;
 
     public function __construct($options = null)

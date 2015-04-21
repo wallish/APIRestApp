@@ -14,4 +14,5 @@ class Controller
     {
         return $this->view;
     }
+
 }

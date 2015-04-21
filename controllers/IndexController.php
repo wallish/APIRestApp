@@ -11,10 +11,10 @@ class IndexController extends Controller
     {
         $foo = User::getInstance()->fetchAll();
         
+        $xml = new MyXMLParser();
+        echo $xml->generate();
 
-        $this->getView()->render('index/index', ['users' => $foo]);
-
-        die('IndexController/Index');
+        //$this->getView()->render('index/index', ['users' => $foo]);
     }
 
     public function showAction()

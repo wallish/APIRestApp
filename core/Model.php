@@ -43,7 +43,7 @@ class Model extends Database
             $result = ['code' => 1, 'id' => $this->getAdapter()->lastInsertId(), 'message' => [] ];
         } catch(PDOException $e){
             echo 'Error' . $e->getMessage();
-            $result = ['code' => 1, 'id' => $data['id'], 'message' => $e->getMessage()];
+            $result = ['code' => -1, 'id' => $data['id'], 'message' => $e->getMessage()];
         }
     
         return $result;
@@ -73,7 +73,7 @@ class Model extends Database
         } catch(PDOException $e){
             echo 'Error' . $e->getMessage();
             echo $query;
-            $result = ['code' => 1, 'id' => $data['id'], 'message' => $e->getMessage()];
+            $result = ['code' => -1, 'id' => $data['id'], 'message' => $e->getMessage()];
         }
     
         return $result;
@@ -105,7 +105,7 @@ class Model extends Database
         } catch(PDOException $e){
             echo 'Error' . $e->getMessage();
             echo $query;
-            $result = ['code' => 1, 'id' => $where, 'message' => $e->getMessage()];
+            $result = ['code' => -1, 'id' => $where, 'message' => $e->getMessage()];
         }
     
         return $result;

@@ -5,7 +5,7 @@ class Game extends Model
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'user';
+    private $table = 'game';
 
     public function __construct()
     {
@@ -18,6 +18,11 @@ class Game extends Model
         return self::$adapter;
     }
 
+    public function getTable()
+    {
+        return $this->table;
+    }
+
     public static function getInstance()
     {
         if (is_null(self::$instance)) {
@@ -27,37 +32,23 @@ class Game extends Model
         return self::$instance;
     }
 
-    public function fetchEntry($field, $search)
+    public function fetchEntry(array $filter)
     {
-        $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table.' where '.$field.' = :'.$field);
-        $reponse->execute(array(':'.$field => $search));
+        $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table.' where '.$filter['field'].' = :'.$filter['field']);
+        $reponse->execute(array(':'.$filter['field'] => $filter['search']));
 
         return $reponse->fetchAll();
     }
 
     public function fetchAll($query = null)
     {
+        $args = func_get_args();
+        array_shift($args);
+
         $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table);
         $reponse->execute();
 
         return $reponse->fetchAll();
     }
 
-    public function delete($id)
-    {
-        /* $reponse = $this->getAdapter()->prepare('DELETE * FROM '.$this->table' where id = :id ');
-        $reponse->execute(array(':id'=> $id));
-
-        return $reponse->fetchAll();*/
-    }
-
-    public function save(array $data)
-    {
-        $reponse = $this->getAdapter()->prepare('DESCRIBE '.$this->table);
-        $reponse->execute();
-
-        return $reponse->fetchAll(PDO::FETCH_COLUMN);
-
-        //"INSERT INTO MyGuests (firstname, lastname, email) VALUES ('John', 'Doe', 'john@example.com)";
-    }
 }

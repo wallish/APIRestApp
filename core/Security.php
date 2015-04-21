@@ -33,7 +33,7 @@ class Security
             header('HTTP/1. 200 OK');
             echo 'token ok';
         } else {
-            header('HTTP/1. 403 OK');
+            header('HTTP/1. 403 Unauthorized');
             echo 'token fail';
             exit;
         }
