@@ -20,6 +20,10 @@ $defaultEnvironment = 'development';
 defined($const) || define($const, (getenv($const) ? getenv($const) : $defaultEnvironmentu));
 die($const);
 */
+if (!file_exists('config/app.ini'))
+{
+	die('app.ini missing : You need to create an app.ini file in the folder /config, for that use app.ini.example');
+}
 $config = parse_ini_file('config/app.ini');
 $GLOBALS['config'] = $config;
 // put in gloabls

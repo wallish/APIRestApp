@@ -42,7 +42,7 @@ class Model extends Database
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
             $this->getAdapter()->lastInsertId();
-            $result = ['code' => 1, 'id' => $this->getAdapter()->lastInsertId(), 'message' => []];
+            $result = ['code' => DB_SUCCESS_ADD, 'id' => $this->getAdapter()->lastInsertId(), 'message' => []];
         } catch (PDOException $e) {
             echo 'Error'.$e->getMessage();
             $result = ['code' => -1, 'id' => $data['id'], 'message' => $e->getMessage()];
@@ -73,7 +73,7 @@ class Model extends Database
         try {
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
-            $result = ['code' => 1, 'id' => $data['id'], 'message' => []];
+            $result = ['code' => DB_SUCCESS_UPDATE, 'id' => $data['id'], 'message' => []];
         } catch (PDOException $e) {
             echo 'Error'.$e->getMessage();
             echo $query;
@@ -109,7 +109,7 @@ class Model extends Database
         try {
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
-            $result = ['code' => 1, 'id' => $where, 'message' => []];
+            $result = ['code' => DB_SUCCESS_DELETE, 'id' => $where, 'message' => []];
         } catch (PDOException $e) {
             echo 'Error'.$e->getMessage();
             echo $query;
