@@ -1,11 +1,11 @@
 <?php
 
-class Game extends Model
+class Console extends Model
 {
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'game';
+    private $table = 'console';
 
     public function __construct()
     {

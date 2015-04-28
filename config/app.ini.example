@@ -1,0 +1,5 @@
+[local]
+database.host = localhost
+database.db = dbanme
+database.user = user
+database.password = password

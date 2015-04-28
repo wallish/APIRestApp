@@ -11,7 +11,7 @@ class GameController extends Controller
     {
         //$game = Game::getInstance()->save(array());
 
-   
+
         $this->getView()->set('foo', 'bar');
         $this->getView()->render('game/index');
         die('GameController/Index');

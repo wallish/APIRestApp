@@ -6,19 +6,20 @@ class MyXMLParser
     {
         //init => root
         $gamesXML = new SimpleXMLElement('<catalogue></catalogue>');
-		$games = $gamesXML->addChild('jeu');
-		$games->addAttribute('jeuId', '1');
-		$games->addChild('titre', 'Grand Theft Auto V');
-        $this->editeur(null,$games);
-        $this->console(null,$games);
+        $games = $gamesXML->addChild('jeu');
+        $games->addAttribute('jeuId', '1');
+        $games->addChild('titre', 'Grand Theft Auto V');
+        $this->editeur(null, $games);
+        $this->console(null, $games);
         $games->addChild('description', 'blablabla');
         $games->addChild('siteweb', 'www.toto.com');
-        $this->genre(null,$games);
-        $this->theme(null,$games);
-        $this->support(null,$games);
-		$this->mode(null,$games);
+        $this->genre(null, $games);
+        $this->theme(null, $games);
+        $this->support(null, $games);
+        $this->mode(null, $games);
 
-		Header('Content-type: text/xml');
+        Header('Content-type: text/xml');
+
         return $gamesXML->asXML();
     }
 
@@ -32,7 +33,7 @@ class MyXMLParser
             'console_nom' => 'SONY PS4',
             'console_date_sortie' => '2013-11-13',
             'jeu_console_prix' => '69.99',
-            'console_prix' => '389.90'
+            'console_prix' => '389.90',
 
         ];
 
@@ -42,9 +43,8 @@ class MyXMLParser
             'console_nom' => 'SONY PS4',
             'console_date_sortie' => '2013-11-13',
             'jeu_console_prix' => '69.99',
-            'console_prix' => '389.90'
+            'console_prix' => '389.90',
         ];
-
 
         foreach ($data as $key => $value) {
             $console = $consoles->addChild('console');
@@ -53,12 +53,11 @@ class MyXMLParser
             $console->addChild('nomConsole', $value['console_nom']);
             $console->addChild('dateDeSortie', $value['console_date_sortie']);
             $attri = $console->addChild('prixJeu', $value['jeu_console_prix']);
-            $attri->addAttribute('devise','€');
+            $attri->addAttribute('devise', '€');
             $attri = $console->addChild('prix', $value['console_prix']);
-            $attri->addAttribute('devise','€');
+            $attri->addAttribute('devise', '€');
             $this->media(null, $console);
             $this->commentaire(null, $console);
-
         }
     }
 
@@ -83,7 +82,6 @@ class MyXMLParser
             $commentaire->addChild('manette', $value['commentaire_contenu']);
             $commentaire->addChild('alimentation', $value['commentaire_contenu']);
             $commentaire->addChild('stockage', $value['commentaire_contenu']);
-          
         }
     }
 
@@ -94,9 +92,8 @@ class MyXMLParser
         $data[] =  ['media_type' => 'video', 'media_contenu' => 'url youtube'];
 
         foreach ($data as $key => $value) {
-            $media = $medias->addChild('media',$value['media_contenu']);
-            $media->addAttribute('type',$value['media_type']);
-
+            $media = $medias->addChild('media', $value['media_contenu']);
+            $media->addAttribute('type', $value['media_type']);
         }
     }
 
@@ -114,10 +111,8 @@ class MyXMLParser
             $commentaire->addChild('date', $value['commentaire_date']);
             $commentaire->addChild('note', $value['commentaire_note']);
             $commentaire->addChild('contenu', $value['commentaire_contenu']);
-          
         }
     }
-
 
     public function editeur($data, $parent)
     {
@@ -130,7 +125,7 @@ class MyXMLParser
         foreach ($data as $key => $value) {
             $editeur = $editeurs->addChild('editeur');
             foreach ($value as $key => $pcdata) {
-                $editeur->addChild((string)$str[$key], $pcdata);
+                $editeur->addChild((string) $str[$key], $pcdata);
             }
         }
     }
@@ -157,12 +152,12 @@ class MyXMLParser
 
     public function support($data, $parent)
     {
-    	$supports = $parent->addChild('supports');
-    	$data = [0 => 'Online', 1 => 'DVD', 2 => 'Blu-Ray', 3 => 'Playstation Store', 4 => 'Contenu Xbox Live'];
+        $supports = $parent->addChild('supports');
+        $data = [0 => 'Online', 1 => 'DVD', 2 => 'Blu-Ray', 3 => 'Playstation Store', 4 => 'Contenu Xbox Live'];
 
-    	foreach ($data as $key => $value) {
-    		$supports->addChild('support', $value);
-    	}
+        foreach ($data as $key => $value) {
+            $supports->addChild('support', $value);
+        }
     }
 
     public function mode($data, $parent)
@@ -174,6 +169,4 @@ class MyXMLParser
             $modes->addChild('mode', $value);
         }
     }
-
-
 }

@@ -2,10 +2,12 @@
 
 class Database extends PDO
 {
-    const  PARAM_HOST = DATABASE_HOST;
-    const  PARAM_DB = DATABASE_DB;
-    const  PARAM_USER = DATABASE_USER;
-    const  PARAM_PASSWORD = DATABASE_PASSWORD;
+
+    //die(var_dump($GLOBALS['ini']));
+    const  PARAM_HOST = $GLOBALS['config']->database.host;
+    const  PARAM_DB = $GLOBALS['config']->database.db;
+    const  PARAM_USER = $GLOBALS['config']->database.user;
+    const  PARAM_PASSWORD = $GLOBALS['config']->database.password;
     private static $instance = null;
 
     public function __construct($options = null)

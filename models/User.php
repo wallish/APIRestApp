@@ -50,5 +50,4 @@ class User extends Model
 
         return $reponse->fetchAll();
     }
-
 }

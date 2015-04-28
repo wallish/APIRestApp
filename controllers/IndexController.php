@@ -9,8 +9,8 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $foo = User::getInstance()->fetchAll();
-        
+        //$foo = User::getInstance()->fetchAll();
+
         $xml = new MyXMLParser();
         echo $xml->generate();
 

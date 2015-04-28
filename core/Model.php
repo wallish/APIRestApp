@@ -27,87 +27,95 @@ class Model extends Database
     public function insert($data, $table)
     {
         $fields = $this->getColumns($table);
-   
+
         foreach ($data as $field => $value) {
-            if (!in_array($field, $fields)) unset($data[$field]);
+            if (!in_array($field, $fields)) {
+                unset($data[$field]);
+            }
         }
 
         $queryFields = implode(', ', array_keys($data));
         $queryData = implode("', '", array_values($data));
-        $query = "INSERT INTO ".$table." (".$queryFields.") VALUES ('".$queryData."')";
+        $query = 'INSERT INTO '.$table.' ('.$queryFields.") VALUES ('".$queryData."')";
 
-        try{
+        try {
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
             $this->getAdapter()->lastInsertId();
-            $result = ['code' => 1, 'id' => $this->getAdapter()->lastInsertId(), 'message' => [] ];
-        } catch(PDOException $e){
-            echo 'Error' . $e->getMessage();
+            $result = ['code' => 1, 'id' => $this->getAdapter()->lastInsertId(), 'message' => []];
+        } catch (PDOException $e) {
+            echo 'Error'.$e->getMessage();
             $result = ['code' => -1, 'id' => $data['id'], 'message' => $e->getMessage()];
         }
-    
+
         return $result;
     }
 
     public function update($data, $table)
     {
         $fields = $this->getColumns($table);
-        $querySet = "";
+        $querySet = '';
         foreach ($data as $field => $value) {
-            if (!in_array($field, $fields)) unset($data[$field]);
+            if (!in_array($field, $fields)) {
+                unset($data[$field]);
+            }
         }
 
         $queryFields = implode(', ', array_keys($data));
         $queryData = implode("', '", array_values($data));
 
         foreach ($data as $key => $value) {
-           $querySet .= $key."='".$value."',"; 
+            $querySet .= $key."='".$value."',";
         }
 
-        $query = "UPDATE ".$table." SET ".substr($querySet, 0, -1)." WHERE id='".$data['id']."'";
-        
-        try{
+        $query = 'UPDATE '.$table.' SET '.substr($querySet, 0, -1)." WHERE id='".$data['id']."'";
+
+        try {
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
-            $result = ['code' => 1, 'id' => $data['id'], 'message' => [] ];
-        } catch(PDOException $e){
-            echo 'Error' . $e->getMessage();
+            $result = ['code' => 1, 'id' => $data['id'], 'message' => []];
+        } catch (PDOException $e) {
+            echo 'Error'.$e->getMessage();
             echo $query;
             $result = ['code' => -1, 'id' => $data['id'], 'message' => $e->getMessage()];
         }
-    
+
         return $result;
     }
 
     public function delete($where, $table)
     {
-        if(!$where) die("missing where");
+        if (!$where) {
+            die('missing where');
+        }
 
         $fields = $this->getColumns($table);
-        $querySet = "";
+        $querySet = '';
         foreach ($where as $field => $value) {
-            if (!in_array($field, $fields)) unset($where[$field]);
+            if (!in_array($field, $fields)) {
+                unset($where[$field]);
+            }
         }
 
         $queryFields = implode(', ', array_keys($where));
         $queryData = implode("', '", array_values($where));
 
         foreach ($where as $key => $value) {
-           $querySet .= $key."='".$value."'"; 
+            $querySet .= $key."='".$value."'";
         }
 
-        $query = "DELETE FROM ".$table." WHERE ".$querySet;
-        
-        try{
+        $query = 'DELETE FROM '.$table.' WHERE '.$querySet;
+
+        try {
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
-            $result = ['code' => 1, 'id' => $where, 'message' => [] ];
-        } catch(PDOException $e){
-            echo 'Error' . $e->getMessage();
+            $result = ['code' => 1, 'id' => $where, 'message' => []];
+        } catch (PDOException $e) {
+            echo 'Error'.$e->getMessage();
             echo $query;
             $result = ['code' => -1, 'id' => $where, 'message' => $e->getMessage()];
         }
-    
+
         return $result;
     }
 
