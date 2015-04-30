@@ -1,11 +1,12 @@
 <?php
 
-class Game extends Model
+class ConsoleFeatures extends Model
 {
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'jeu';
+    private $table = 'console_caracteristique';
+    private $reftable = 'caracteristique';
 
     public function __construct()
     {
@@ -40,10 +41,26 @@ class Game extends Model
         return $reponse->fetchAll();
     }
 
-    public function fetchAll($query = null)
+    public function fetchAll($query = 1)
     {
-        $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table);
+
+
+        $reponse = $this->getAdapter()->prepare("
+            SELECT * 
+            FROM ".$this->table.",".$reftable.", console 
+            WHERE console_caracteristique_console_id = console_id 
+            AND caracteristique_id = console_caracteristique_caracteristique_id 
+            AND console_caracteristique_console_id =".$query);
+
         $reponse->execute();
+
+        /*
+        SELECT * 
+            FROM console, console_caracteristique,caracteristique
+            WHERE console_caracteristique_console_id = console_id 
+            AND caracteristique_id = console_caracteristique_caracteristique_id 
+            AND console_caracteristique_console_id =1
+            */
 
         return $reponse->fetchAll();
     }

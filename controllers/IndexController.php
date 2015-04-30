@@ -9,10 +9,12 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        //$foo = User::getInstance()->fetchAll();
-
-        $xml = new MyXMLParser();
-        echo $xml->generate();
+        //$foo = Game::getInstance()->fetchEntry(1);
+        $foo = GameConsole::getInstance()->fetchAll(1);
+        $foo = ConsoleFeatures::getInstance()->fetchAll(1);
+        print_r($foo);
+        /*$xml = new MyXMLParser();
+        echo $xml->generate();/*/
 
         //$this->getView()->render('index/index', ['users' => $foo]);
     }

@@ -42,9 +42,6 @@ class User extends Model
 
     public function fetchAll($query = null)
     {
-        $args = func_get_args();
-        array_shift($args);
-
         $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table);
         $reponse->execute();
 

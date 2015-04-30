@@ -7,11 +7,11 @@ define('DB_SUCCESS_ADD', 2);
 define('DB_SUCCESS_UPDATE', 3);
 define('DB_SUCCESS_DELETE', 4);
 
-/*define("DATABASE_HOST", 'localhost');
+define("DATABASE_HOST", '62.210.240.68');
 define("DATABASE_DB", 'jeuxvideos');
-define("DATABASE_USER", 'root');
-define("DATABASE_PASSWORD", '');
-*/
+define("DATABASE_USER", 'mimitos');
+define("DATABASE_PASSWORD", 'mimitos');
+
 
 // beta config loader
 /*defined('APPLICATION_PATH') or define('APPLICATION_PATH', dirname(__FILE__));
