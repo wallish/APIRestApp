@@ -1,11 +1,12 @@
 <?php
 
-class Game extends Model
+class GameEditor extends Model
 {
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'jeu';
+    private $table = 'jeu_editeur';
+    private $reftable = 'editeur';
 
     public function __construct()
     {
@@ -43,8 +44,9 @@ class Game extends Model
     public function fetchAll($query = 1)
     {
         $reponse = $this->getAdapter()->prepare("
-            SELECT * FROM ".$this->table."
-            WHERE jeu_id =".$query
+            SELECT * FROM ".$this->table.",".$this->reftable."
+            WHERE jeu_editeur_editeur_id = editeur_id 
+            AND jeu_editeur_jeu_id =".$query
         );
 
         $reponse->execute();

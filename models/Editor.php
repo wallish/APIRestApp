@@ -1,11 +1,11 @@
 <?php
 
-class Game extends Model
+class Editor extends Model
 {
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'jeu';
+    private $table = 'editor';
 
     public function __construct()
     {
@@ -40,13 +40,9 @@ class Game extends Model
         return $reponse->fetchAll();
     }
 
-    public function fetchAll($query = 1)
+    public function fetchAll($query = null)
     {
-        $reponse = $this->getAdapter()->prepare("
-            SELECT * FROM ".$this->table."
-            WHERE jeu_id =".$query
-        );
-
+        $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table);
         $reponse->execute();
 
         return $reponse->fetchAll();

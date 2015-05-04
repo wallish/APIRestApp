@@ -2,49 +2,40 @@
 
 class MyXMLParser
 {
-    public function generate()
+    public function generate($gameData)
     {
         //init => root
         $gamesXML = new SimpleXMLElement('<catalogue></catalogue>');
+
+        $editor = GameEditor::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $genre = GameGenre::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $theme = GameTheme::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $support = GameSupport::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $mode = GameMode::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $console = GameConsole::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $comment = Comment::getInstance()->fetchAll($gameData[0]['jeu_id']);
+
         $games = $gamesXML->addChild('jeu');
-        $games->addAttribute('jeuId', '1');
-        $games->addChild('titre', 'Grand Theft Auto V');
-        $this->editeur(null, $games);
-        $this->console(null, $games);
-        $games->addChild('description', 'blablabla');
-        $games->addChild('siteweb', 'www.toto.com');
-        $this->genre(null, $games);
-        $this->theme(null, $games);
-        $this->support(null, $games);
-        $this->mode(null, $games);
+        $games->addAttribute('jeuId', $gameData[0]['jeu_id']);
+        $games->addChild('titre', $gameData[0]['jeu_titre']);
+
+        $this->editeur($editor, $games);
+        $this->console($console, $games, $comment);
+        $games->addChild('description', $gameData[0]['jeu_description']);
+        $games->addChild('siteweb', $gameData[0]['jeu_site_web']);
+        $this->genre($genre, $games);
+        $this->theme($theme, $games);
+        $this->support($support, $games);
+        $this->mode($mode, $games);
 
         Header('Content-type: text/xml');
 
         return $gamesXML->asXML();
     }
 
-    public function console($data, $parent)
+    public function console($data, $parent, $comment)
     {
         $consoles = $parent->addChild('consoles');
-
-        $data[] = [
-            'jeu_console_date_sortie' => '2015-04-14',
-            'jeu_console_classification' => '+18 ans',
-            'console_nom' => 'SONY PS4',
-            'console_date_sortie' => '2013-11-13',
-            'jeu_console_prix' => '69.99',
-            'console_prix' => '389.90',
-
-        ];
-
-        $data[] = [
-            'jeu_console_date_sortie' => '2015-04-14',
-            'jeu_console_classification' => '+18 ans',
-            'console_nom' => 'SONY PS4',
-            'console_date_sortie' => '2013-11-13',
-            'jeu_console_prix' => '69.99',
-            'console_prix' => '389.90',
-        ];
 
         foreach ($data as $key => $value) {
             $console = $consoles->addChild('console');
@@ -56,8 +47,13 @@ class MyXMLParser
             $attri->addAttribute('devise', '€');
             $attri = $console->addChild('prix', $value['console_prix']);
             $attri->addAttribute('devise', '€');
-            $this->media(null, $console);
-            $this->commentaire(null, $console);
+            //$this->media(null, $console);
+            foreach ($comment as $key => $c) {
+               // die(var_dump($c));
+                //if($value['jeu_console_console_id'] == $c['commentaire_jeu_console_console_id'])
+                   // $this->commentaire($c, $console);
+            }
+            //$this->caracteristique();
         }
     }
 
@@ -100,32 +96,35 @@ class MyXMLParser
     public function commentaire($data, $parent)
     {
         $commentaires = $parent->addChild('commentaires');
-        $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
-        $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
+       // $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
+       // $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
 
         $str = ['commentaire_utilisateur' => 'utilisateur', 'commentaire_date' => 'date', 'commentaire_note' => 'note', 'commentaire_contenu' => 'contenu'];
-
-        foreach ($data as $key => $value) {
+        //foreach ($data as $key => $value) {
+        //    die(var_dump($value));
             $commentaire = $commentaires->addChild('commentaire');
-            $commentaire->addChild('utilisateur', $value['commentaire_utilisateur']);
-            $commentaire->addChild('date', $value['commentaire_date']);
-            $commentaire->addChild('note', $value['commentaire_note']);
-            $commentaire->addChild('contenu', $value['commentaire_contenu']);
-        }
+         //   $commentaire->addChild('utilisateur', $value['commentaire_utilisateur']);
+            $commentaire->addChild('date', $data['commentaire_date']);
+            $commentaire->addChild('note', $data['commentaire_note']);
+            $commentaire->addChild('contenu', $data['commentaire_contenu']);
+        //}
     }
 
     public function editeur($data, $parent)
     {
         $editeurs = $parent->addChild('editeurs');
+        /*
         $data[] =  ['editeur_nom' => 'RockstarGames', 'editeur_annee_creation' => '1998', 'editeur_pays' => 'USA', ' editeur_site_web' => 'rockstartgames.com', 'editeur_fondateur' => 'Sam Houser'];
         $data[] =  ['editeur_nom' => 'Take-Two Interctive', 'editeur_annee_creation' => '1993', 'editeur_pays' => 'USA', ' editeur_site_web' => 'take2games.com', 'editeur_fondateur' => 'Ryan Brant'];
+        */
 
         $str = ['editeur_nom' => 'nom', 'editeur_annee_creation' => 'anneeCreation', 'editeur_pays' => 'pays', ' editeur_site_web' => 'sitewebediteur', 'editeur_fondateur' => 'fondateur'];
 
         foreach ($data as $key => $value) {
             $editeur = $editeurs->addChild('editeur');
             foreach ($value as $key => $pcdata) {
-                $editeur->addChild((string) $str[$key], $pcdata);
+                if(isset($str[$key]))
+                    $editeur->addChild((string) $str[$key], $pcdata);
             }
         }
     }
@@ -133,40 +132,36 @@ class MyXMLParser
     public function genre($data, $parent)
     {
         $genres = $parent->addChild('genres');
-        $data = [0 => 'Action', 1 => 'FPS', 2 => 'TPS'];
 
         foreach ($data as $key => $value) {
-            $genres->addChild('genre', $value);
+            $genres->addChild('genre', $value['genre_libelle']);
         }
     }
 
     public function theme($data, $parent)
     {
         $themes = $parent->addChild('themes');
-        $data = [0 => 'Contemporain', 1 => 'Amérique du nord'];
 
         foreach ($data as $key => $value) {
-            $themes->addChild('theme', $value);
+            $themes->addChild('theme', $value['theme_libelle']);
         }
     }
 
     public function support($data, $parent)
     {
         $supports = $parent->addChild('supports');
-        $data = [0 => 'Online', 1 => 'DVD', 2 => 'Blu-Ray', 3 => 'Playstation Store', 4 => 'Contenu Xbox Live'];
 
         foreach ($data as $key => $value) {
-            $supports->addChild('support', $value);
+            $supports->addChild('support', $value['support_libelle']);
         }
     }
 
     public function mode($data, $parent)
     {
         $modes = $parent->addChild('modes');
-        $data = [0 => 'Jouable en solo', 1 => 'Multi en ligne'];
 
         foreach ($data as $key => $value) {
-            $modes->addChild('mode', $value);
+            $modes->addChild('mode', $value['mode_libelle']);
         }
     }
 }

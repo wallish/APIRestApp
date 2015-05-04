@@ -2,17 +2,22 @@
 
 class Database extends PDO
 {
-    const  PARAM_HOST = DATABASE_HOST;
-    const  PARAM_DB = DATABASE_DB;
-    const  PARAM_USER = DATABASE_USER;
-    const  PARAM_PASSWORD = DATABASE_PASSWORD;
+    private  $host = null;
+    private  $db = null;
+    private  $user = null;
+    private  $password = null;
     private static $instance = null;
 
     public function __construct($options = null)
     {
-        parent::__construct('mysql:host='.self::PARAM_HOST.';dbname='.self::PARAM_DB,
-        self::PARAM_USER,
-        self::PARAM_PASSWORD, $options);
+        $this->host = $GLOBALS['config']['database.host'];
+        $this->db = $GLOBALS['config']['database.db'];
+        $this->user = $GLOBALS['config']['database.user'];
+        $this->password = $GLOBALS['config']['database.password'];
+
+        parent::__construct('mysql:host='.$this->host.';dbname='.$this->db,
+        $this->user,
+        $this->password, $options);
     }
 
     public static function getInstance()
