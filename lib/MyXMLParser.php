@@ -2,19 +2,21 @@
 
 class MyXMLParser
 {
+    private $id = null;
     public function generate($gameData)
     {
         //init => root
         $gamesXML = new SimpleXMLElement('<catalogue></catalogue>');
-
+        $this->id = $gameData[0]['jeu_id'];
         $editor = GameEditor::getInstance()->fetchAll($gameData[0]['jeu_id']);
         $genre = GameGenre::getInstance()->fetchAll($gameData[0]['jeu_id']);
         $theme = GameTheme::getInstance()->fetchAll($gameData[0]['jeu_id']);
         $support = GameSupport::getInstance()->fetchAll($gameData[0]['jeu_id']);
         $mode = GameMode::getInstance()->fetchAll($gameData[0]['jeu_id']);
         $console = GameConsole::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        
         $comment = Comment::getInstance()->fetchAll($gameData[0]['jeu_id']);
-
+//        die(var_dump($feature));
         $games = $gamesXML->addChild('jeu');
         $games->addAttribute('jeuId', $gameData[0]['jeu_id']);
         $games->addChild('titre', $gameData[0]['jeu_titre']);
@@ -36,7 +38,7 @@ class MyXMLParser
     public function console($data, $parent, $comment)
     {
         $consoles = $parent->addChild('consoles');
-
+        
         foreach ($data as $key => $value) {
             $console = $consoles->addChild('console');
             $console->addAttribute('dateSortieJeu', $value['jeu_console_date_sortie']);
@@ -47,49 +49,42 @@ class MyXMLParser
             $attri->addAttribute('devise', '€');
             $attri = $console->addChild('prix', $value['console_prix']);
             $attri->addAttribute('devise', '€');
-            //$this->media(null, $console);
-            foreach ($comment as $key => $c) {
-               // die(var_dump($c));
-                //if($value['jeu_console_console_id'] == $c['commentaire_jeu_console_console_id'])
-                   // $this->commentaire($c, $console);
+           
+           $this->media(null, $console, $value['console_id'], $this->id);
+
+            $this->caracteristique(null, $console, $value['console_id']);
+
+            foreach ($comment as $key => $c) { //die(var_dump($c));
+                //die(var_dump($c));
+                if($value['jeu_console_console_id'] == $c['commentaire_jeu_console_console_id'])
+                    $this->commentaire($c, $console);
+
+
             }
             //$this->caracteristique();
         }
     }
 
-    public function caracteristique($data, $parent)
+    public function caracteristique($data, $parent, $id)
     {
         $caracteristique = $parent->addChild('caracteristique');
-        $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
-        $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
 
-        $str = ['commentaire_utilisateur' => 'utilisateur', 'commentaire_date' => 'date', 'commentaire_note' => 'note', 'commentaire_contenu' => 'contenu'];
+        $feature = ConsoleFeatures::getInstance()->fetchAll($id);
 
-        foreach ($data as $key => $value) {
-            $commentaire = $caracteristique->addChild('commentaire');
-            $commentaire->addChild('cpu', $value['commentaire_utilisateur']);
-            $commentaire->addChild('gpu', $value['commentaire_date']);
-            $commentaire->addChild('ram', $value['commentaire_note']);
-            $commentaire->addChild('poids', $value['commentaire_contenu']);
-            $commentaire->addChild('lecteurOptique', $value['commentaire_contenu']);
-            $commentaire->addChild('supportVideo', $value['commentaire_contenu']);
-            $commentaire->addChild('bluetooth', $value['commentaire_contenu']);
-            $commentaire->addChild('wifi', $value['commentaire_contenu']);
-            $commentaire->addChild('manette', $value['commentaire_contenu']);
-            $commentaire->addChild('alimentation', $value['commentaire_contenu']);
-            $commentaire->addChild('stockage', $value['commentaire_contenu']);
+        foreach ($feature as $key => $value) {
+            $caracteristique->addChild($value['caracteristique_nom'], $value['console_caracteristique_valeur']);
         }
+
     }
 
-    public function media($data, $parent)
+    public function media($data, $parent, $consoleId)
     {
         $medias = $parent->addChild('medias');
-        $data[] =  ['media_type' => 'audio', 'media_contenu' => 'image'];
-        $data[] =  ['media_type' => 'video', 'media_contenu' => 'url youtube'];
 
-        foreach ($data as $key => $value) {
-            $media = $medias->addChild('media', $value['media_contenu']);
-            $media->addAttribute('type', $value['media_type']);
+        $media = Media::getInstance()->fetchAll($consoleId, $this->id);
+        foreach ($media as $key => $value) {
+            $media = $medias->addChild('media', $value['media_url']);
+            $media->addAttribute('type', $value['media_type_libelle']);
         }
     }
 
@@ -98,16 +93,16 @@ class MyXMLParser
         $commentaires = $parent->addChild('commentaires');
        // $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
        // $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
-
         $str = ['commentaire_utilisateur' => 'utilisateur', 'commentaire_date' => 'date', 'commentaire_note' => 'note', 'commentaire_contenu' => 'contenu'];
         //foreach ($data as $key => $value) {
-        //    die(var_dump($value));
+
             $commentaire = $commentaires->addChild('commentaire');
-         //   $commentaire->addChild('utilisateur', $value['commentaire_utilisateur']);
+            $commentaire->addChild('utilisateur', $data['commentaire_utilisateur']);
             $commentaire->addChild('date', $data['commentaire_date']);
             $commentaire->addChild('note', $data['commentaire_note']);
-            $commentaire->addChild('contenu', $data['commentaire_contenu']);
+           //$commentaire->addChild('contenu', $data['commentaire_contenu']);
         //}
+            //die(var_dump($commentaires));
     }
 
     public function editeur($data, $parent)

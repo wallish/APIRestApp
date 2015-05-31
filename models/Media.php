@@ -1,12 +1,12 @@
 <?php
 
-class ConsoleFeatures extends Model
+class Media extends Model
 {
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'console_caracteristique';
-    private $reftable = 'caracteristique';
+    private $table = 'media';
+    private $reftable = 'media_type';
 
     public function __construct()
     {
@@ -41,16 +41,15 @@ class ConsoleFeatures extends Model
         return $reponse->fetchAll();
     }
 
-    public function fetchAll($query = 1)
+    public function fetchAll($consoleId = 1, $jeuId = 1)
     {
-
 
         $reponse = $this->getAdapter()->prepare("
             SELECT * 
-            FROM ".$this->table.",".$this->reftable.", console 
-            WHERE console_caracteristique_console_id = console_id 
-            AND caracteristique_id = console_caracteristique_caracteristique_id 
-            AND console_caracteristique_console_id =".$query);
+            FROM ".$this->table.",".$this->reftable."
+            WHERE media_media_type_id = media_type_id
+            AND media_jeu_console_console_id =".$consoleId."
+            AND media_jeu_console_jeu_id =".$jeuId);
 
         $reponse->execute();
 
