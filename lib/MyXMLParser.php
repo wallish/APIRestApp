@@ -3,7 +3,7 @@
 class MyXMLParser
 {
     private $id = null;
-    public function generate($gameData)
+    public function generate($gameData, $headerXml = true)
     {
         //init => root
         $gamesXML = new SimpleXMLElement('<catalogue></catalogue>');
@@ -30,7 +30,7 @@ class MyXMLParser
         $this->support($support, $games);
         $this->mode($mode, $games);
 
-        Header('Content-type: text/xml');
+        if ($headerXml) Header('Content-type: text/xml');
 
         return $gamesXML->asXML();
     }
@@ -100,7 +100,7 @@ class MyXMLParser
             $commentaire->addChild('utilisateur', $data['commentaire_utilisateur']);
             $commentaire->addChild('date', $data['commentaire_date']);
             $commentaire->addChild('note', $data['commentaire_note']);
-           //$commentaire->addChild('contenu', $data['commentaire_contenu']);
+            $commentaire->addChild('contenu', "tata");
         //}
             //die(var_dump($commentaires));
     }
@@ -157,6 +157,18 @@ class MyXMLParser
 
         foreach ($data as $key => $value) {
             $modes->addChild('mode', $value['mode_libelle']);
+        }
+    }
+
+    public function checker($data)
+    {
+        $xml = new DOMDocument();
+        $xml->load($data);
+
+        if (!$xml->schemaValidate('XML/jeuxvideo.xsd')) {
+            print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
+        } else {
+            echo 'ok';
         }
     }
 }

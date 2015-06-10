@@ -8,3 +8,4 @@ if (!$xml->schemaValidate('jeuxvideo.xsd')) {
 } else {
     echo 'ok';
 }
+	

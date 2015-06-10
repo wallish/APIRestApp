@@ -22,22 +22,27 @@ class GameController extends Controller
         die('GameController/Test');
     }
 
-    public function getAction()
-    {
+    public function getAction($args)
+    { 
         if (Request::isGet()) {
             header('HTTP/1. 200 OK');
-            $result = User::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
+            //$result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
+
+            $game = Game::getInstance()->fetchAll(1);
+            $xml = new MyXMLParser();
+            //echo $xml->generate($game);
+
+            
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }
 
-        die('GameController/add');
     }
 
     public function addAction()
     {
         if (Request::isPost()) {
-            $result = User::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
+            $result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
             if ($result['code'] = 1) {
                 header('HTTP/1. 201 Created');
             }
@@ -67,7 +72,7 @@ class GameController extends Controller
             header('HTTP/1. 200 OK');
             parse_str(file_get_contents('php://input'), $post_content);
             var_dump($put_content);
-            $result = User::getInstance()->save($post_content, Game::getInstance()->getTable());
+            $result = Game::getInstance()->save($post_content, Game::getInstance()->getTable());
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }

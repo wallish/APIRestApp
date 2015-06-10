@@ -9,7 +9,7 @@ $sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
 
 // ouverture de la connection
 $ch = curl_init();
-$url = 'localhost/api/user/get/id/2/format/json/';
+$url = 'http://myapi.local/game/get/id/2';
 
 // set les options
 curl_setopt($ch, CURLOPT_URL, $url);
