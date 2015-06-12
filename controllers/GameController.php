@@ -1,5 +1,6 @@
 <?php
 
+
 class GameController extends Controller
 {
     public function __construct()
@@ -27,12 +28,31 @@ class GameController extends Controller
         if (Request::isGet()) {
             header('HTTP/1. 200 OK');
             //$result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
+            //die(var_dump($args));
+           
+            if($args[0] == 'id' && $args[1] != "")
+            {
+                $game = Game::getInstance()->fetchAll($args[1]);
+                if(!empty($game)){
+                    $xml = new MyXMLParser();
+                    echo $xml->generate($game[0]);
+                } else {
+                    die('error');
+                }
+                    
+            }else {
+                $games = Game::getInstance()->fetchList();
+                $xml = new MyXMLParser();
+                foreach ($games as $key => $game) {
+                    $final_xml = str_replace("<?xml version=\"1.0\"?>\n",'',$xml->generate($game, true));
+                    
+                }
+                echo $final_xml;
+            }
 
-            $game = Game::getInstance()->fetchAll(1);
-            $xml = new MyXMLParser();
-            //echo $xml->generate($game);
 
-            
+
+
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }

@@ -27,3 +27,15 @@ Interface :
 > $_server request_method
 > permission différentes (acl)
 > vérifier les données en post (type)
+
+> 2 role : admin et user
+> transmettre API + DOC + dump + indentifiant
+> interface
+	-listing de tous les jeux
+	-détail d'un jeu
+	-formulaire d'ajout avec merge d'un array static
+	-modification d'un jeu et les supprimer
+
+oral
+presenter l'auth
+les verbes 

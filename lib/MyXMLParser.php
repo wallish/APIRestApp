@@ -3,28 +3,36 @@
 class MyXMLParser
 {
     private $id = null;
+    private $gamesXML = null;
+
+    function __construct() {
+         $this->gamesXML = new SimpleXMLElement('<catalogue></catalogue>');
+    }
+
+
     public function generate($gameData, $headerXml = true)
     {
+        //die(var_dump($gamesXML));   
         //init => root
-        $gamesXML = new SimpleXMLElement('<catalogue></catalogue>');
-        $this->id = $gameData[0]['jeu_id'];
-        $editor = GameEditor::getInstance()->fetchAll($gameData[0]['jeu_id']);
-        $genre = GameGenre::getInstance()->fetchAll($gameData[0]['jeu_id']);
-        $theme = GameTheme::getInstance()->fetchAll($gameData[0]['jeu_id']);
-        $support = GameSupport::getInstance()->fetchAll($gameData[0]['jeu_id']);
-        $mode = GameMode::getInstance()->fetchAll($gameData[0]['jeu_id']);
-        $console = GameConsole::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $this->id = $gameData['jeu_id'];
+        $editor = GameEditor::getInstance()->fetchAll($gameData['jeu_id']);
+        $genre = GameGenre::getInstance()->fetchAll($gameData['jeu_id']);
+        $theme = GameTheme::getInstance()->fetchAll($gameData['jeu_id']);
+        $support = GameSupport::getInstance()->fetchAll($gameData['jeu_id']);
+        $mode = GameMode::getInstance()->fetchAll($gameData['jeu_id']);
+        $console = GameConsole::getInstance()->fetchAll($gameData['jeu_id']);
         
-        $comment = Comment::getInstance()->fetchAll($gameData[0]['jeu_id']);
+        $comment = Comment::getInstance()->fetchAll($gameData['jeu_id']);
+
 //        die(var_dump($feature));
-        $games = $gamesXML->addChild('jeu');
-        $games->addAttribute('jeuId', $gameData[0]['jeu_id']);
-        $games->addChild('titre', $gameData[0]['jeu_titre']);
+        $games = $this->gamesXML->addChild('jeu');
+        $games->addAttribute('jeuId', $gameData['jeu_id']);
+        $games->addChild('titre', $gameData['jeu_titre']);
 
         $this->editeur($editor, $games);
         $this->console($console, $games, $comment);
-        $games->addChild('description', $gameData[0]['jeu_description']);
-        $games->addChild('siteweb', $gameData[0]['jeu_site_web']);
+        $games->addChild('description', $gameData['jeu_description']);
+        $games->addChild('siteweb', $gameData['jeu_site_web']);
         $this->genre($genre, $games);
         $this->theme($theme, $games);
         $this->support($support, $games);
@@ -32,8 +40,10 @@ class MyXMLParser
 
         if ($headerXml) Header('Content-type: text/xml');
 
-        return $gamesXML->asXML();
+        return $this->gamesXML->asXML();
     }
+
+
 
     public function console($data, $parent, $comment)
     {

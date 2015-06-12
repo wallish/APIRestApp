@@ -9,8 +9,10 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        $game = Game::getInstance()->fetchAll(1);
-      
+        //$game = Game::getInstance()->fetchAll(1);
+        $game = Game::getInstance()->fetchList();
+        
+        die(var_dump($game));
         $xml = new MyXMLParser();
         //echo $xml->generate($game);
 
@@ -20,15 +22,15 @@ class IndexController extends Controller
         
         echo $xmlstring;
        
-        die();
+       
         $xml = new DOMDocument();
-        $xml->load($out1);
+        $xml->load($xmlstring);
         if (!$xml->schemaValidate('XML/jeuxvideo.xsd')) {
             print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
         } else {
             echo 'ok';
         }
-
+        
 
 
 

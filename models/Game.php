@@ -51,4 +51,16 @@ class Game extends Model
 
         return $reponse->fetchAll();
     }
+
+    public function fetchList()
+    {
+        $reponse = $this->getAdapter()->prepare("
+            SELECT * FROM ".$this->table
+            
+        );
+
+        $reponse->execute();
+
+        return $reponse->fetchAll();
+    }
 }
