@@ -9,7 +9,7 @@ $sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
 
 // ouverture de la connection
 $ch = curl_init();
-$url = 'http://myapi.local/game/get/id/2';
+$url = 'http://myapi.local/game/get/id/2/';
 
 // set les options
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -19,5 +19,8 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('HEADERSIGNATURE:'.$sig, 'HEADERUSER:
 
 // exec le curl
 $head = curl_exec($ch);
+echo curl_getinfo($ch) . '<br/>';
+echo curl_errno($ch) . '<br/>';
+echo curl_error($ch) . '<br/>';
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);

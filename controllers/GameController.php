@@ -50,9 +50,6 @@ class GameController extends Controller
                 echo $final_xml;
             }
 
-
-
-
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }
@@ -62,7 +59,8 @@ class GameController extends Controller
     public function addAction()
     {
         if (Request::isPost()) {
-            $result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
+            die(var_dump($_REQUEST));
+            //$result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
             if ($result['code'] = 1) {
                 header('HTTP/1. 201 Created');
             }

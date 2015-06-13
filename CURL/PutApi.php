@@ -6,10 +6,10 @@ $api_secret = 'foo';
 $id = '1';
 
 $sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
-
+try {
 // ouverture de la connection
 $ch = curl_init();
-$url = 'localhost/api/user/update/';
+$url = 'http://myapi.local/game/put/';
 
 // set post
 $fields = array(
@@ -32,3 +32,11 @@ if (!$response) {
     die('Connection Failure');
 }
 curl_close($ch);
+} catch(Exception $e) {
+
+    trigger_error(sprintf(
+        'Curl failed with error #%d: %s',
+        $e->getCode(), $e->getMessage()),
+        E_USER_ERROR);
+
+}
