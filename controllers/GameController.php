@@ -49,7 +49,7 @@ class GameController extends Controller
                 }
                 /*$foo = "<?xml version=\"1.0\"?>\n";*/
 
-                echo $foo.$final_xml;
+                echo $final_xml;
             }
 
         } else {
