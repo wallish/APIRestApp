@@ -44,7 +44,7 @@ class Game extends Model
     {
         $reponse = $this->getAdapter()->prepare("
             SELECT * FROM ".$this->table."
-            WHERE jeu_id =".$query
+            WHERE jeu_id =".$query." AND deleted = 0"
         );
 
         $reponse->execute();
@@ -55,12 +55,25 @@ class Game extends Model
     public function fetchList()
     {
         $reponse = $this->getAdapter()->prepare("
-            SELECT * FROM ".$this->table
+            SELECT * FROM ".$this->table." WHERE deleted != 1"
             
         );
 
         $reponse->execute();
 
         return $reponse->fetchAll();
+    }
+
+    public function desactivate($id)
+    {
+        if(!$id) die("missing parameter");
+        $reponse = $this->getAdapter()->prepare("
+            UPDATE ".$this->table." SET deleted = 1 WHERE jeu_id=".$id
+            
+        );
+
+        $reponse->execute();
+
+        //return $reponse->fetchAll();
     }
 }

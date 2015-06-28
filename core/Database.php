@@ -15,9 +15,14 @@ class Database extends PDO
         $this->user = $GLOBALS['config']['database.user'];
         $this->password = $GLOBALS['config']['database.password'];
 
-        parent::__construct('mysql:host='.$this->host.';dbname='.$this->db,
+        try{
+             parent::__construct('mysql:host='.$this->host.';dbname='.$this->db,
         $this->user,
         $this->password, $options);
+         } catch (PDOException $e){
+            echo 'Échec lors de la connexion : ' . $e->getMessage();
+         }
+       
     }
 
     public static function getInstance()

@@ -47,7 +47,9 @@ class GameController extends Controller
                     $final_xml = str_replace("<?xml version=\"1.0\"?>\n",'',$xml->generate($game, true));
                     
                 }
-                echo $final_xml;
+                /*$foo = "<?xml version=\"1.0\"?>\n";*/
+
+                echo $foo.$final_xml;
             }
 
         } else {
@@ -71,7 +73,7 @@ class GameController extends Controller
         die('GameController/add');
     }
 
-    public function deleteAction()
+   /* public function deleteAction()
     {
         if (Request::isDelete()) {
             header('HTTP/1. 204 No Content');
@@ -82,7 +84,7 @@ class GameController extends Controller
         }
 
         die('GameController/delete');
-    }
+    }*/
 
     public function updateAction()
     {
@@ -90,11 +92,25 @@ class GameController extends Controller
             header('HTTP/1. 200 OK');
             parse_str(file_get_contents('php://input'), $post_content);
             var_dump($put_content);
-            $result = Game::getInstance()->save($post_content, Game::getInstance()->getTable());
+            $result = Game::getInstance()->desactivate($post_content, Game::getInstance()->getTable());
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }
 
         die('GameController/update');
+    }
+
+    public function deleteAction()
+    {
+        if (Request::isDelete()) {
+           // header('HTTP/1. 204 No Content');
+            parse_str(file_get_contents('php://input'), $post_content);
+
+            $result = Game::getInstance()->desactivate($post_content['id'], Game::getInstance()->getTable());
+
+            //var_dump($put_content);
+        } else {
+            header('HTTP/1. 405 Method Not Allowed');
+        }
     }
 }

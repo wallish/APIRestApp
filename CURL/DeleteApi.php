@@ -9,11 +9,11 @@ $sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
 
 // ouverture de la connection
 $ch = curl_init();
-$url = 'localhost/api/user/delete/';
+$url = 'localhost/apirestapp/game/delete/';
 
 // set post
 $fields = array(
-                'id' => 9, // TODO : sécurité => remplacer id par une key
+                'id' => 1, // TODO : sécurité => remplacer id par une key
             );
 
 // set les options
