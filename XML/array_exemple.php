@@ -1,36 +1,11 @@
 <?php
 
-$user = 'foobar';
-$api = 'bar';
-$api_secret = 'foo';
-$id = '1';
-
-$sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
-
-// ouverture de la connection
-$ch = curl_init();
-$url = 'http://localhost/apirestapp/game/add/';
-
-// set post
-$fields = array(
-				'game' => array(
-                	'jeu_titre' => urlencode('sf4'),
-                	'jeu_description' => urlencode('jeu de combat'),
-                	'jeu_site_web' => urlencode('www.foo.com'),
-                ),
-            );
-
 $to_merge = array(
 	'media' =>  array(
 		'media_url' => 'http://www.jeux-consoles.net/img/9729_mario_sonic.jpg', 
 		'media_media_type_id' => 1
 		),
 	'console' => array(
-		'console_nom' => 'Console Test',
-		'console_date_sortie' => '2013-11-22 00:00:00',
-		'console_prix' => "100"
-		),
-	'caracteristique' => array(
 		'console_nom' => 'Console Test',
 		'console_date_sortie' => '2013-11-22 00:00:00',
 		'console_prix' => "100"
@@ -63,25 +38,4 @@ $to_merge = array(
 		'jeu_console_classification' => '+3'
 		),
 );
-
-$mergeData = array_merge($fields,$to_merge);
-
-// set les options
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-curl_setopt($ch, CURLOPT_POST, count($mergeData));
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($mergeData));
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('HEADERSIGNATURE:'.$sig, 'HEADERUSER:'.$user, 'HOST:localhost'));
-
-// exec le curl
-$response = curl_exec($ch);
-echo curl_getinfo($ch) . '<br/>';
-echo curl_errno($ch) . '<br/>';
-echo curl_error($ch) . '<br/>';
-if (!$response) {
-    die('Connection Failure');
-}
-curl_close($ch);
-
 	

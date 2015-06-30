@@ -61,8 +61,34 @@ class GameController extends Controller
     public function addAction()
     {
         if (Request::isPost()) {
-            die(var_dump($_REQUEST));
-            //$result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
+
+
+            $jeuId = "";
+            $consoleId = "";
+            $resultGame = Game::getInstance()->save($_REQUEST['game'], Game::getInstance()->getTable());
+            $jeuId = $resultGame['id'];
+            $resultConsole = Console::getInstance()->save($_REQUEST['console'], Console::getInstance()->getTable());
+            $consoleId = $resultConsole['id'];
+          //  $resultCaracteristique = Caracteristique::getInstance()->save($_REQUEST['console'], Caracteristique::getInstance()->getTable());
+
+            foreach ($_REQUEST['console_caracteristique'] as $key => $value) {
+                $value['console_caracteristique_console_id'] = $consoleId;
+                $resultConsoleCaracteristique = ConsoleFeatures::getInstance()->save($value, ConsoleFeatures::getInstance()->getTable());
+            }
+
+            $_REQUEST['jeu_console']['jeu_console_jeu_id'] = $jeuId;
+            $_REQUEST['jeu_console']['jeu_console_console_id'] = $consoleId;
+
+            $resultGameConsole = GameConsole::getInstance()->save($_REQUEST['jeu_console'], GameConsole::getInstance()->getTable());
+
+
+            foreach ($_REQUEST['commentaire'] as $key => $value) {
+                $value['commentaire_jeu_console_jeu_id'] = (int)$jeuId;
+                $value['commentaire_jeu_console_console_id'] = (int)$consoleId;
+                $resultCommentaire = Comment::getInstance()->save($value, Comment::getInstance()->getTable());
+            }
+
+               die(var_dump($resultGame));
             if ($result['code'] = 1) {
                 header('HTTP/1. 201 Created');
             }

@@ -29,12 +29,16 @@ class Model extends Database
         $fields = $this->getColumns($table);
 
         foreach ($data as $field => $value) {
-            if (!in_array($field, $fields)) {
+            if (!in_array($field, array_values($fields))) {
                 unset($data[$field]);
+            }else {
+                $filterField[] = $field;
             }
+
         }
 
-        $queryFields = implode(', ', array_keys($data));
+
+        $queryFields = implode(', ', array_values($filterField));
         $queryData = implode("', '", array_values($data));
         $query = 'INSERT INTO '.$table.' ('.$queryFields.") VALUES ('".$queryData."')";
 
