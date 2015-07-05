@@ -88,6 +88,25 @@ class GameController extends Controller
                 $resultCommentaire = Comment::getInstance()->save($value, Comment::getInstance()->getTable());
             }
 
+
+
+            $mode = Mode::getInstance()->save($_REQUEST['mode']['mode_libelle'], Mode::getInstance()->getTable());
+            $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $mode['id'], GameMode::getInstance()->getTable()));
+            
+            $theme = Theme::getInstance()->save($_REQUEST['theme']['theme_libelle'], Mode::getInstance()->getTable());
+            $jeuTheme = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'theme_id' => $theme['id'], GameTheme::getInstance()->getTable()));
+            
+            $editor = Editor::getInstance()->save($_REQUEST['editor']['editor_libelle'], Mode::getInstance()->getTable());
+            $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $editor['id'], GameEditor::getInstance()->getTable()));
+            
+            $genre = Genre::getInstance()->save($_REQUEST['genre']['genre_libelle'], Mode::getInstance()->getTable());
+            $jeuGenre = GameGenre::getInstance()->save(array('jeu_id' => $jeuId,'genre_id' => $genre['id'], GameGenre::getInstance()->getTable()));
+            
+            $support = Support::getInstance()->save($_REQUEST['support']['support_libelle'], Mode::getInstance()->getTable());
+            $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $support['id'], GameSupport::getInstance()->getTable()));
+            
+
+
                die(var_dump($resultGame));
             if ($result['code'] = 1) {
                 header('HTTP/1. 201 Created');
@@ -118,7 +137,7 @@ class GameController extends Controller
             header('HTTP/1. 200 OK');
             parse_str(file_get_contents('php://input'), $post_content);
             var_dump($put_content);
-            $result = Game::getInstance()->desactivate($post_content, Game::getInstance()->getTable());
+            $result = Game::getInstance()->save($post_content, Game::getInstance()->getTable());
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }
