@@ -62,6 +62,7 @@ Exemple concret :
 
 array php :
 
+```php
 array(
 	'game' => array(
     	'jeu_titre' => 'sf4',
@@ -69,9 +70,10 @@ array(
     	'jeu_site_web' => 'www.foo.com',
     ),
 );
+```
 
 json : 
-
+```php
 {
   "game": {
     "jeu_titre": "sf4",
@@ -79,9 +81,10 @@ json :
     "jeu_site_web": "www.foo.com"
   }
 }
-
+```
 ## array static à merge (à convertir en json) ##
 
+```php
 $to_merge = array(
 	'media' =>  array(
 		'media_url' => 'http://www.jeux-consoles.net/img/9729_mario_sonic.jpg', 
@@ -125,13 +128,14 @@ $to_merge = array(
 		'jeu_console_classification' => '+3'
 		),
 );
+```
 
 # UPDATE #
 
 Pour l'instant, il y a que la table jeu qui peut-être update, ne pas oublier de fournir l'id
 
 format type : 
-
+```php
 {
   "game": {
     "jeu_id": "2",
@@ -140,7 +144,7 @@ format type :
     "jeu_site_web": "www.foo.com"
   }
 }
-
+```
 # DELETE #
 
 désactivation du jeu (champ deleted) = delete
