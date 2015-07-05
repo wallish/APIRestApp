@@ -49,14 +49,14 @@ les verbes
 # POST #
 
 un json doit être récupéré, il doit être convertie en array sous cette forme : 
-
+```php
 array(
 	'table' => array(
 		'champ1' => 'foo',
 		'champ2' => 'bar',
 	),
 );
-
+```
 Exemple concret :
 
 array php :
