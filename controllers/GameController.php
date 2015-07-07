@@ -47,9 +47,9 @@ class GameController extends Controller
                     $final_xml = str_replace("<?xml version=\"1.0\"?>\n",'',$xml->generate($game, true));
                     
                 }
-                /*$foo = "<?xml version=\"1.0\"?>\n";*/
-
-                echo $final_xml;
+                $foo = "<?xml version=\"1.0\"?>\n";
+                header ("Content-Type:text/xml");
+                echo $foo.$final_xml;
             }
 
         } else {
