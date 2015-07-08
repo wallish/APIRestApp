@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <!DOCTYPE catalogue SYSTEM "jeuxvideos.dtd"> -->
+
+<catalogue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="/Users/fanorazafindramaro/jeuxVideos/jeuxvideos.xsd">
+	<jeu jeuId="1">
+		<titre>Grand Theft Auto V</titre>
+		<editeurs>
+			<editeur>
+				<nom>RockstarGames</nom>
+				<anneeCreation>1998</anneeCreation>
+				<pays>USA</pays>
+				<sitewebediteur>rockstartgames.com</sitewebediteur>
+				<fondateur>Sam Houser</fondateur>
+			</editeur>
+			<editeur>
+				<nom>Take-Two Interctive</nom>
+				<anneeCreation>1993</anneeCreation>
+				<pays>USA</pays>
+				<sitewebediteur>take2games.com</sitewebediteur>
+				<fondateur>Ryan Brant</fondateur>
+			</editeur>
+		</editeurs>
+		<description>
+			Jeu d'action-aventure en monde ouvert, Grand Theft Auto (GTA) V vous place dans la peau de trois personnages inédits : Michael, Trevor et Franklin qui ont élu domicile à Los Santos, ville de la région de San Andreas. Braquages et missions font partie du quotidien du joueur qui pourra également cohabiter avec 16 utilisateurs dans cet univers persistant.
+		</description>
+		<siteweb>www.grandtheftauto5.com</siteweb>
+		<consoles>
+			<console dateSortieJeu="2015-04-14" classification="+18 ans">
+				<nomConsole>SONY PS4</nomConsole>
+				<dateDeSortie>2013-11-13</dateDeSortie>
+				<prixJeu devise="EUR">69.99</prixJeu>
+				<prix devise="EUR">389.90</prix>
+				<caracteristiques>
+					<cpu>X86-64 AMD Jaguar 8 coeurs</cpu>
+					<gpu>AMD Radeon 1.84 TFlop</gpu>
+					<ram>8 Go de RAM GDDR5</ram>
+					<poids>2.8 kg </poids>
+					<lecteurOptique>Blu-ray X6 - DVD X8</lecteurOptique>
+					<supportVideo>Ultra HD</supportVideo>
+					<bluetooth>Bluetooth 2.1</bluetooth>
+					<wifi>WiFi 802.11 b/g/n</wifi>
+					<portUsb>3.0</portUsb>
+					<manette>DualShock 4</manette>
+					<alimentation>AC 220 - 240 V, 50 / 60 Hz</alimentation>
+					<stockage>500go</stockage>
+				</caracteristiques>
+				<medias>
+					<media type="image"/>
+					<media type="video"/>
+				</medias>
+				<commentaires>
+					<commentaire>
+						<utilisateur>BeerFr0mHell</utilisateur>
+						<date>2014-11-21</date>
+						<note>18</note>
+						<contenu>
+							Ce GTA V remastérise m'a tellement fais fantasmé avant et je m'en suis pourtant retrouvé circonsfait à la fin.... en effet je suis fan de GTA comme beaucoup! mais néanmoins je connais déjà le jeux et y trouve quelques pauvres nouveautés. Un plus étant bien sûr les végétaux et les effets de lumières sur le béton m'ont laissés sans appelle!
+							Sans compter le système de mouvementent sont toujours si efficace! (saut, combat, etc..)
+							Le mode première personne absolument révolutionnaire pour un gta (ls vues habitacle de voiture/ cockpitt d'avion m'ont fait tout juste bandé! 3
+							Des défauts sont présent sont certes présents mais n'ont guère évolué depuis l'édition de base X360 et PS3...
+							Breff un remastered à ne pas prendre à la légère! :)
+							
+							PS. j'étais bouré à 4h du math! J'espère que mon commentaire ressemble à quelque chose de constructif! kiss ya'll
+						</contenu>
+					</commentaire>
+					<commentaire>
+						<utilisateur>BeerFr0mHell</utilisateur>
+						<date>2014-11-21</date>
+						<note>19</note>
+						<contenu>
+							Ce GTA V remastérise m'a tellement fais fantasmé avant et je m'en suis pourtant retrouvé circonsfait à la fin.... en effet je suis fan de GTA comme beaucoup! mais néanmoins je connais déjà le jeux et y trouve quelques pauvres nouveautés. Un plus étant bien sûr les végétaux et les effets de lumières sur le béton m'ont laissés sans appelle!
+							Sans compter le système de mouvementent sont toujours si efficace! (saut, combat, etc..)
+							Le mode première personne absolument révolutionnaire pour un gta (ls vues habitacle de voiture/ cockpitt d'avion m'ont fait tout juste bandé! 3
+							Des défauts sont présent sont certes présents mais n'ont guère évolué depuis l'édition de base X360 et PS3...
+							Breff un remastered à ne pas prendre à la légère! :)
+							
+							PS. j'étais bouré à 4h du math! J'espère que mon commentaire ressemble à quelque chose de constructif! kiss ya'll
+						</contenu>
+					</commentaire>
+					<commentaire>
+						<utilisateur>profusions</utilisateur>
+						<date>2014-11-18</date>
+						<note>16</note>
+						<contenu>
+							C'est indéniable, Rockstar a une nouvelle fois fait du très bon boulot. Plus d'une année après la sortie du jeu original, dont les ventes se sont écoulées à plus de 34 millions d'exemplaires, voilà que le petit bijou de Rockstar revient en force sur next-gen, pour un résultat on ne peut plus bluffant. Textures, circulation, vicissitudes météorologiques, passants, tout a été repensé pour faire honneur aux nouvelles générations de console. Sans être transcendant, le résultat fait néanmoins plaisir à l'oeil. Clairement plus fluide que sur old-gen, il faut cependant signaler un peu de clipping et autres maladresses qui ramèneront sur Terre les plus utopiques. Ces problèmes ne sont toutefois pas dramatiques, et le jeu témoigne réellement du passage à la next-gen. Outre tout un petit tas de nouveautés comme une pléthore de nouveaux animaux terrestres et aquatiques, de nouvelles musiques, ou encore le fait que tous les DLC soient directement inclus dans cette version, c'est bien la vue FPS (à la première personne) qui s'inscrit comme l'ajout majeur de ce rematriçage. En effet, il sera possible de jouer le jeu entièrement à la première personne, que ce soit dans les véhicules qui disposent chacun pour le coup d'une modélisation propre et très appréciable, mais aussi lors des affrontements solo ou online. Qui plus est, on s'étonne de la voir fonctionner aussi bien, elle est en effet digne de très bons FPS. Ceux qui n'ont pas joué à l'ancien, courrez l'acheter. Quant aux autres, prenez en compte que le jeu reste grosso modo le même, mais dispose de suffisamment d'ajouts qui, à défaut de complètement renouveler l'expérience, évidemment, la rendent beaucoup appréciable que le jeu original.
+						</contenu>
+					</commentaire>
+					<commentaire>
+						<utilisateur>FireGhost93</utilisateur>
+						<date>2014-11-19</date>
+						<note>19</note>
+						<contenu>
+							Impressionnant ! Je l'avais fais sur 360 et il était bluffant à cette période, je le refais sur Ps4 et toujours aussi réussi, mais comment bluffer avec le même jeu sur deux générations différentes ?
+							C'est du Rockstar, c'est forcément des jeux énormément travaillés.
+							
+							L'histoire, l'essence même du jeu, est immersive au plus haut point. Les dialogues sont d'une qualité impressionnante, les personnages ont chacun leurs qualités et leurs défauts, mais sont tous attachants et réussis. Et le mieux, c'est qu'on peut poursuivre les missions en switchant à chaque fois sur le perso suivant, on ne sera jamais largué dans leur monde respectif (assez dur à dire...)
+							Dynamique, immersive, rythmée, drôle, émouvante, variée voilà l'histoire du jeu !
+							
+							Le Gameplay est très bien fichu, dirigiste dans les missions certes mais l'immensité de la carte compense ce "défaut". Le personnage joué est bien maniable, sauf quand on saute par moments pour passer au dessus d'un mur ou d'une barrière, des fois c'est faceplant mais bon c'est pas dramatique. La conduite est excellente, bien mieux que GTA IV qui était pourrave... Pour les avions c'est toujours compliqué au début mais on s'y fait vite.
+							
+							Techniquement c'était impressionnant mais alors là c'est magnifique, chaque détail, chaque pixel est travaillé et c'est particulièrement réussi. Petit bémol pour les chutes de framerate de temps en temps mais ça dure une demie seconde, c'est très bref donc c'est juste pour chipoter... La végétation est énoooorme, les effets de lumière de toute beauté, tous les ajouts sont les bienvenus (dont les musiques, c'est génial)
+							
+							Bande son géniale, variée
+							Durée de vie gigantesque (100h minimum pour les 100%)
+							
+							Achetez le !
+						</contenu>
+					</commentaire>
+				</commentaires>
+			</console>
+			<console dateSortieJeu="2013-09-17" classification="+18 ans">
+				<nomConsole>SONY PS3</nomConsole>
+				<dateDeSortie>2006-11-17</dateDeSortie>
+				<prixJeu devise="EUR">49.99</prixJeu>
+				<prix devise="EUR">169.99</prix>
+				<caracteristiques>
+					<cpu>Cell Broadband Engine</cpu>
+					<gpu>nVidia RSX à 550 MHz</gpu>
+					<ram>256 Mo de XDR - 256 Mo de GDDR3</ram>
+					<poids>3.2 kg </poids>
+					<lecteurOptique>Blu-ray X2 - DVD X8</lecteurOptique>
+					<supportVideo>1080p</supportVideo>
+					<bluetooth>Bluetooth 2.0 </bluetooth>
+					<wifi>WiFi 802.11 b/g/n</wifi>
+					<portUsb>2.0</portUsb>
+					<manette>Sixaxis - DualShock 3</manette>
+					<alimentation>AC 220 - 240 V, 50 / 60 Hz</alimentation>
+					<stockage>12 à 500 Go</stockage>
+				</caracteristiques>
+				<medias>
+					<media type="image"/>
+					<media type="video"/>
+				</medias>
+				</console>
+			<console dateSortieJeu="2013-09-17" classification="+18 ans">
+				<nomConsole>Xbox One</nomConsole>
+				<dateDeSortie>2013-11-22</dateDeSortie>
+				<prixJeu devise="EUR">69.99</prixJeu>
+				<prix devise="EUR">389.99</prix>
+				<caracteristiques>
+					<cpu>x86 AMD 8 coeurs</cpu>
+					<gpu>AMD Radeon 768 GPU Cores</gpu>
+					<ram>8 Go de RAM DDR3</ram>
+					<poids>3.2 kg </poids>
+					<lecteurOptique>Lecteur Blu-ray</lecteurOptique>
+					<supportVideo>1080p</supportVideo>
+					<bluetooth>Bluetooth 2.0 </bluetooth>
+					<wifi>Wi-fi 802.11n</wifi>
+					<portUsb>3.0</portUsb>
+					<manette>Microsoft Xbox One Wireless</manette>
+					<alimentation>220-240 V</alimentation>
+					<stockage>500 Go</stockage>
+				</caracteristiques>
+				<medias>
+					<media type="image"/>
+					<media type="video"/>
+				</medias>
+			</console>
+		</consoles>
+		<genres>
+			<genre>Action</genre>
+			<genre>FPS</genre>
+			<genre>TPS</genre>
+		</genres>
+		<themes>
+			<theme>Contemporain</theme>
+			<theme>Amérique du nord</theme>
+		</themes>
+		<supports>
+			<support>Online</support>
+			<support>DVD</support>
+			<support>Blu-Ray</support>
+			<support>Playstation Store</support>
+			<support>Contenu Xbox Live</support>
+		</supports>
+		<modes>
+			<mode>Jouable en solo</mode>
+			<mode>Multi en ligne</mode>
+		</modes>
+	</jeu>
+</catalogue>
