@@ -5,7 +5,7 @@ class Editor extends Model
     public $string;
     private static $instance = null;
     private static $adapter = null;
-    private $table = 'editor';
+    private $table = 'editeur';
 
     public function __construct()
     {
@@ -36,6 +36,17 @@ class Editor extends Model
     {
         $reponse = $this->getAdapter()->prepare('SELECT * FROM '.$this->table.' where '.$filter['field'].' = :'.$filter['field']);
         $reponse->execute(array(':'.$filter['field'] => $filter['search']));
+
+        return $reponse->fetchAll();
+    }
+
+    public function fetchEntries()
+    {
+        $reponse = $this->getAdapter()->prepare("
+            SELECT * FROM ".$this->table
+        );
+
+        $reponse->execute();
 
         return $reponse->fetchAll();
     }

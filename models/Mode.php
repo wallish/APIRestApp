@@ -40,6 +40,17 @@ class Mode extends Model
         return $reponse->fetchAll();
     }
 
+    public function fetchEntries()
+    {
+        $reponse = $this->getAdapter()->prepare("
+            SELECT * FROM ".$this->table
+        );
+
+        $reponse->execute();
+
+        return $reponse->fetchAll();
+    }
+
     public function fetchAll($jeuId = 1, $consoleId = 1)
     {
         $reponse = $this->getAdapter()->prepare("
