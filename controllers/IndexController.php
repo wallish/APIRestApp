@@ -56,6 +56,7 @@ class IndexController extends Controller
         $gameMode = $gameGenre = $gameTheme = $gameSupport = $gameEditor = null;
         if($args){
             if($args[0] == 'id' && $args[1] != ""){
+                $game = Game::getInstance()->fetchEntry(array('field' => 'jeu_id', 'search' => $args[1]));
                 $gameMode = GameMode::getInstance()->fetchEntry(array('field' => 'jeu_mode_jeu_id', 'search' => $args[1]));
                 $gameGenre = GameGenre::getInstance()->fetchEntry(array('field' => 'jeu_genre_jeu_id', 'search' => $args[1]));
                 $gameTheme = GameTheme::getInstance()->fetchEntry(array('field' => 'jeu_theme_jeu_id', 'search' => $args[1]));
@@ -66,9 +67,9 @@ class IndexController extends Controller
        
         //die(var_dump($gameSupport[0]));
         $bar = [];
-        $bar['jeu']['jeu_titre'] = ['type' => 'text', 'value' => ''];
-        $bar['jeu']['jeu_description'] = ['type' => 'text', 'value' => ''];
-        $bar['jeu']['jeu_siteweb'] = ['type' => 'text', 'value' => ''];
+        $bar['jeu']['jeu_titre'] = ['type' => 'text', 'value' => ($game[0]['jeu_titre']) ?  utf8_encode($game[0]['jeu_titre']):''];
+        $bar['jeu']['jeu_description'] = ['type' => 'text', 'value' => ($game[0]['jeu_description']) ?  utf8_encode($game[0]['jeu_description']):''];
+        $bar['jeu']['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):''];
         
         $mode = Mode::getInstance()->fetchEntries();
         $bar['mode']['mode_id'] = ['type' => 'text', 'value' => ($gameMode[0]['jeu_mode_mode_id']) ? $gameMode[0]['jeu_mode_mode_id']:''];
