@@ -8,20 +8,30 @@
 		}
 		$curl = new Curl("foobar","bar","foo");
 		
-		//$xml_content = file_get_contents($curl->get());
+		$xml_content = substr($curl->get(), 0, -1);
 
-		//$xml_content = file_get_contents("jeuvideos.xml");
+		$xml = new SimpleXMLElement($xml_content);
 
-		//echo print_r($curl->get(),true);
+		$results = $xml->xpath($path);	
 		
-		$xml = new SimpleXMLElement($curl->get());
-		//echo print_r($xml, true);	
-		//$results = $xml->xpath($path);
+		//echo print_r($results, true);
+		$response = array();
+		foreach ($results as $result) {
+			if(!isset($_POST["id"]))
+				$response[] = array("id" => (string) $result->attributes()["jeuId"], "titre"=> (string) $result->{"titre"});
+			else {
+				$consoles = $jaquettes = array();
+				foreach($result->consoles->console as $console){
+					$consoles[] = (string) $console->nomConsole;
+					$jaquettes[] = (string) $console->medias->media;
+				}
+				$response[] = array( "titre"=> (string) $result->{"titre"}, "consoles" => $consoles, "jaquettes" => $jaquettes, "description" => (string) $result->description);	
+			}
+				
+			//$reponse[] = $result->{'titre'};
+		}
 
-
-		//echo print_r($results,true);
+		echo json_encode($response);
 	}
-	/*foreach ($results as $result) {
-		echo "Résultat trouvé : {$result}<br>";
-	}*/
+	/**/
 ?>

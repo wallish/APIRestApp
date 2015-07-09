@@ -26,9 +26,24 @@
 			</nav>
 			
 			<div class="content">
-				<pre></pre>
+				<div class="list-group">
+				  <!--<a href="#" class="list-group-item active"></a>-->
+				  
+				</div>
 			</div>
 		</div>
-		<script>getList("/catalogue/jeu[@jeuId=2]");</script>
+		<script>
+			//getList("/catalogue/jeu[@jeuId=2]");
+			getElements("/catalogue/jeu");
+
+			$(".list-group").on("click", ".list-group-item", function(){
+				var id = $(this).attr("id");
+				$(this).siblings(".list-group-item").removeClass("active");
+				$(".game-details").hide().remove();
+				$(this).addClass("active");
+				$(this).after("<div class='game-details'></div>").show();
+				getElements("/catalogue/jeu[@jeuId="+id+"]", id);
+			})
+		</script>
 	</body>
 </html>

@@ -27,8 +27,8 @@ class Curl {
 
 		// set les options
 		curl_setopt($this->ch, CURLOPT_URL, $url);
-		curl_setopt($this->ch, CURLOPT_TIMEOUT, 1);
-		curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 1);
+		curl_setopt($this->ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 		curl_setopt($ch, CURLOPT_POST, count($fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
@@ -48,18 +48,25 @@ class Curl {
 		$url = 'http://myapi.local:8888/game/get/id';
 
 		// set les options
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 1);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml','HEADERSIGNATURE:'.$this->sig, 'HEADERUSER:'.$this->user, 'HOST:localhost'));
+		
+		
+		curl_setopt($ch, CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_FAILONERROR,1);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('HEADERSIGNATURE:'.$this->sig, 'HEADERUSER:'.$this->user, 'HOST:localhost'));
 
 		// exec le curl
-		$response = curl_exec($ch);
-		//$response['httpCode'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+		$result = curl_exec($ch);
+		/*echo curl_getinfo($ch) . '<br/>';
+		echo curl_errno($ch) . '<br/>';
+		echo curl_error($ch) . '<br/>';*/
+		//$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		//var_dump($head);
 		curl_close($ch);
 
-		return $response;
+		return $result;
 
 	}
 
