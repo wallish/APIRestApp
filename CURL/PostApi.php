@@ -14,9 +14,9 @@ $url = 'http://localhost/apirestapp/game/add/';
 // set post
 $fields = array(
 				'game' => array(
-                	'jeu_titre' => urlencode('sf4'),
-                	'jeu_description' => urlencode('jeu de combat'),
-                	'jeu_site_web' => urlencode('www.foo.com'),
+                	'jeu_titre' => 'sf4',
+                	'jeu_description' => 'jeu de combat',
+                	'jeu_site_web' => 'www.foo.com',
                 ),
             );
 

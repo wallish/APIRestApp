@@ -35,7 +35,9 @@ class GameController extends Controller
                 $game = Game::getInstance()->fetchAll($args[1]);
                 if(!empty($game)){
                     $xml = new MyXMLParser();
-                    echo $xml->generate($game[0]);
+                    $outputXML=str_replace('<?xml version="1.0"?>', '<?xml version="1.0" encoding="UTF-8"?>', $xml->generate($game[0]));
+                    echo $outputXML;
+
                 } else {
                     die('error');
                 }
@@ -47,8 +49,8 @@ class GameController extends Controller
                     $final_xml = str_replace("<?xml version=\"1.0\"?>\n",'',$xml->generate($game, true));
                     
                 }
-                $foo = "<?xml version=\"1.0\"?>\n";
-                header ("Content-Type:text/xml");
+                $foo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+                header ("Content-Type:text/xml; charset=utf-8");
                 echo $foo.$final_xml;
             }
 

@@ -31,14 +31,14 @@ class MyXMLParser
 
         $this->editeur($editor, $games);
         $this->console($console, $games, $comment);
-        $games->addChild('description', $gameData['jeu_description']);
+        $games->addChild('description', utf8_encode($gameData['jeu_description']));
         $games->addChild('siteweb', $gameData['jeu_site_web']);
         $this->genre($genre, $games);
         $this->theme($theme, $games);
         $this->support($support, $games);
         $this->mode($mode, $games);
 
-        if ($headerXml) Header('Content-type: text/xml');
+        if ($headerXml) Header('Content-type: text/xml; charset=utf-8');
 
         return $this->gamesXML->asXML();
     }
@@ -55,14 +55,14 @@ class MyXMLParser
             $console->addAttribute('classification', $value['jeu_console_classification']);
             $console->addChild('nomConsole', $value['console_nom']);
             $console->addChild('dateDeSortie', $value['console_date_sortie']);
-            $attri = $console->addChild('prixJeu', $value['jeu_console_prix']);
+            $attri = $console->addChild('prixJeu', utf8_encode($value['jeu_console_prix']));
             $attri->addAttribute('devise', '€');
-            $attri = $console->addChild('prix', $value['console_prix']);
+            $attri = $console->addChild('prix', utf8_encode($value['console_prix']));
             $attri->addAttribute('devise', '€');
            
-           $this->media(null, $console, $value['console_id'], $this->id);
+           $this->media(null, $console, utf8_encode($value['console_id']), $this->id);
 
-            $this->caracteristique(null, $console, $value['console_id']);
+            $this->caracteristique(null, $console, utf8_encode($value['console_id']));
 
             foreach ($comment as $key => $c) { //die(var_dump($c));
                 //die(var_dump($c));
@@ -82,7 +82,7 @@ class MyXMLParser
         $feature = ConsoleFeatures::getInstance()->fetchAll($id);
 
         foreach ($feature as $key => $value) {
-            $caracteristique->addChild($value['caracteristique_nom'], $value['console_caracteristique_valeur']);
+            $caracteristique->addChild($value['caracteristique_nom'], utf8_encode($value['console_caracteristique_valeur']));
         }
 
     }
@@ -93,8 +93,8 @@ class MyXMLParser
 
         $media = Media::getInstance()->fetchAll($consoleId, $this->id);
         foreach ($media as $key => $value) {
-            $media = $medias->addChild('media', $value['media_url']);
-            $media->addAttribute('type', $value['media_type_libelle']);
+            $media = $medias->addChild('media', utf8_encode($value['media_url']));
+            $media->addAttribute('type', utf8_encode($value['media_type_libelle']));
         }
     }
 
@@ -107,9 +107,9 @@ class MyXMLParser
         //foreach ($data as $key => $value) {
 
             $commentaire = $commentaires->addChild('commentaire');
-            $commentaire->addChild('utilisateur', $data['commentaire_utilisateur']);
-            $commentaire->addChild('date', $data['commentaire_date']);
-            $commentaire->addChild('note', $data['commentaire_note']);
+            $commentaire->addChild('utilisateur', utf8_encode($data['commentaire_utilisateur']));
+            $commentaire->addChild('date', utf8_encode($data['commentaire_date']));
+            $commentaire->addChild('note', utf8_encode($data['commentaire_note']));
             $commentaire->addChild('contenu', "tata");
         //}
             //die(var_dump($commentaires));
@@ -129,7 +129,7 @@ class MyXMLParser
             $editeur = $editeurs->addChild('editeur');
             foreach ($value as $key => $pcdata) {
                 if(isset($str[$key]))
-                    $editeur->addChild((string) $str[$key], $pcdata);
+                    $editeur->addChild((string) $str[$key], utf8_encode($pcdata));
             }
         }
     }
@@ -139,7 +139,7 @@ class MyXMLParser
         $genres = $parent->addChild('genres');
 
         foreach ($data as $key => $value) {
-            $genres->addChild('genre', $value['genre_libelle']);
+            $genres->addChild('genre', utf8_encode($value['genre_libelle']));
         }
     }
 
@@ -148,7 +148,7 @@ class MyXMLParser
         $themes = $parent->addChild('themes');
 
         foreach ($data as $key => $value) {
-            $themes->addChild('theme', $value['theme_libelle']);
+            $themes->addChild('theme', utf8_encode($value['theme_libelle']));
         }
     }
 
@@ -157,7 +157,7 @@ class MyXMLParser
         $supports = $parent->addChild('supports');
 
         foreach ($data as $key => $value) {
-            $supports->addChild('support', $value['support_libelle']);
+            $supports->addChild('support', utf8_encode($value['support_libelle']));
         }
     }
 
@@ -166,7 +166,7 @@ class MyXMLParser
         $modes = $parent->addChild('modes');
 
         foreach ($data as $key => $value) {
-            $modes->addChild('mode', $value['mode_libelle']);
+            $modes->addChild('mode', utf8_encode($value['mode_libelle']));
         }
     }
 
