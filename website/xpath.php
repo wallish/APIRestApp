@@ -6,7 +6,9 @@
 		if($_POST["path"] != "all") {
 			$path = $_POST["path"];
 		}
-		$curl = new Curl("foobar","bar","foo");
+		// Curl(user, clef de l'api en dur dans le projet, clef api du user depuis la bdd)
+		$curl = new Curl("admin","123456789","jhJBbjBOM64S6f"); /* admin droit au get post delete put */
+		//$curl = new Curl("user","123456789","odzaknddDJZ5DZ5"); /*  le user à uniquement droit au get */
 		
 		$xml_content = substr($curl->get(), 0, -1);
 

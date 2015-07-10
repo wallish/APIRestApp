@@ -1,11 +1,20 @@
 <?php
 
-$user = 'foobar';
-$api = 'bar';
-$api_secret = 'foo';
-$id = '1';
 
-$sig = hash_hmac('sha256', $user.$id.$api_secret.time(), $api);
+/*
+api secret admin = jhJBbjBOM64S6f
+api secret  user = odzaknddDJZ5DZ5
+*/
+/*
+$user = 'admin';
+$api = '123456789';
+$api_secret = 'jhJBbjBOM64S6f';
+*/
+$user = 'user';
+$api = '123456789';
+$api_secret = 'odzaknddDJZ5DZ5';
+
+$sig = hash_hmac('sha256', $user.$api_secret.time(), $api);
 
 // ouverture de la connection
 $ch = curl_init();

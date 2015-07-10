@@ -9,9 +9,11 @@ class IndexController extends Controller
 
     public function indexAction()
     {
+ 
+        Acl::checkAcl();
+        
         //$game = Game::getInstance()->fetchAll(1);
         $game = Game::getInstance()->fetchList();
-        
         die(var_dump($game));
         $xml = new MyXMLParser();
         //echo $xml->generate($game);
