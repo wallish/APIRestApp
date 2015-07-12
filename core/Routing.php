@@ -5,7 +5,7 @@ class Routing
     public static function parseURI()
     {
         $path = explode('/', substr($_SERVER['REQUEST_URI'], 1));
-        $folder = array_shift($path);
+        //$folder = array_shift($path);
         $controller = array_shift($path).'Controller';
         $action = array_shift($path).'Action';
         $args = $path;

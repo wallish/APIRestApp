@@ -74,40 +74,40 @@ class IndexController extends Controller
         $bar['jeu']['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):''];
         
         $mode = Mode::getInstance()->fetchEntries();
-        $bar['mode']['mode_id'] = ['type' => 'text', 'value' => ($gameMode[0]['jeu_mode_mode_id']) ? $gameMode[0]['jeu_mode_mode_id']:''];
-        $bar['mode']['mode_libelle'] = ['type' => 'text', 'value' => ''];
+        $bar['mode']['type'] = 'select';
+        $bar['mode']['value'] = ($gameMode[0]['jeu_mode_mode_id']) ? $gameMode[0]['jeu_mode_mode_id']:'';
         foreach ($mode as $key => $value) {
             //$bar['mode'][] = ['mode_id' => $value['mode_id'], 'mode_libelle' => $value['mode_libelle']];
-            $bar['mode']['data'][] = ['mode_id' => $value['mode_id'], 'mode_libelle' => utf8_encode($value['mode_libelle'])];
+            $bar['mode']['data'][] = ['id' => $value['mode_id'], 'libelle' => utf8_encode($value['mode_libelle'])];
         }
 
         $genre = Genre::getInstance()->fetchEntries();
-        $bar['genre']['genre_id'] = ['type' => 'text', 'value' => ($gameGenre[0]['jeu_genre_genre_id']) ? $gameGenre[0]['jeu_genre_genre_id']:''];
-        $bar['genre']['genre_libelle'] = ['type' => 'text', 'value' => ''];
+        $bar['genre']['type'] = 'select';
+        $bar['genre']['value'] = ($gameGenre[0]['jeu_genre_genre_id']) ? $gameGenre[0]['jeu_genre_genre_id']:'';
         foreach ($genre as $key => $value) {
-            $bar['genre']['data'][] = ['genre_id' => $value['genre_id'], 'genre_libelle' => utf8_encode($value['genre_libelle'])];
+            $bar['genre']['data'][] = ['id' => $value['genre_id'], 'libelle' => utf8_encode($value['genre_libelle'])];
         }
 
         $theme = Theme::getInstance()->fetchEntries();
-        $bar['theme']['theme_id'] = ['type' => 'text', 'value' => ($gameTheme[0]['jeu_theme_theme_id']) ? $gameTheme[0]['jeu_theme_theme_id']:''];
-        $bar['theme']['theme_libelle'] = ['type' => 'text', 'value' => ''];
+        $bar['theme']['type'] = 'select';
+        $bar['theme']['value'] = ($gameTheme[0]['jeu_theme_theme_id']) ? $gameTheme[0]['jeu_theme_theme_id']:'';
         foreach ($theme as $key => $value) {
-            $bar['theme']['data'][] = ['theme_id' => $value['theme_id'], 'theme_libelle' => utf8_encode($value['theme_libelle'])];
+            $bar['theme']['data'][] = ['id' => $value['theme_id'], 'libelle' => utf8_encode($value['theme_libelle'])];
         }
         //die(var_dump($bar['theme']['data']));
 
         $support = Support::getInstance()->fetchEntries();
-        $bar['support']['support_id'] = ['type' => 'text', 'value' => ($gameSupport[0]['jeu_support_support_id']) ? $gameSupport[0]['jeu_support_support_id']:''];
-        $bar['support']['support_libelle'] = ['type' => 'text', 'value' => ''];
+        $bar['support']['type'] = 'select';
+        $bar['support']['value'] = ($gameSupport[0]['jeu_support_support_id']) ? $gameSupport[0]['jeu_support_support_id']:'';
         foreach ($support as $key => $value) {
-            $bar['support']['data'][] = ['support_id' => $value['support_id'], 'support_libelle' => utf8_encode($value['support_libelle'])];
+            $bar['support']['data'][] = ['id' => $value['support_id'], 'libelle' => utf8_encode($value['support_libelle'])];
         }
 
         $editor = Editor::getInstance()->fetchEntries();
-        $bar['editeur']['editeur_id'] = ['type' => 'text', 'value' => ($gameEditor[0]['jeu_editeur_editeur_id']) ? $gameEditor[0]['jeu_editeur_editeur_id']:''];
-        $bar['editeur']['editeur_nom'] = ['type' => 'text', 'value' => ''];
+        $bar['editeur']['type'] = 'select';
+        $bar['editeur']['value'] = ($gameEditor[0]['jeu_editeur_editeur_id']) ? $gameEditor[0]['jeu_editeur_editeur_id']:'';
         foreach ($editor as $key => $value) {
-            $bar['editeur']['data'][] = ['editeur_id' => $value['editeur_id'], 'editeur_nom' => utf8_encode($value['editeur_nom'])];
+            $bar['editeur']['data'][] = ['id' => $value['editeur_id'], 'libelle' => utf8_encode($value['editeur_nom'])];
         }
 
         echo json_encode($bar, JSON_PRETTY_PRINT);

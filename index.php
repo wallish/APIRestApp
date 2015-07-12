@@ -22,5 +22,5 @@ $config = parse_ini_file('config/app.ini');
 $GLOBALS['config'] = $config;
 // put in gloabls
 //die(var_dump((object)$parsed));
-Security::verify();
+//Security::verify();
 Routing::parseURI();
