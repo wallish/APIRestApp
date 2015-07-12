@@ -69,9 +69,9 @@ class IndexController extends Controller
        
         //die(var_dump($gameSupport[0]));
         $bar = [];
-        $bar['jeu']['jeu_titre'] = ['type' => 'text', 'value' => ($game[0]['jeu_titre']) ?  utf8_encode($game[0]['jeu_titre']):''];
-        $bar['jeu']['jeu_description'] = ['type' => 'text', 'value' => ($game[0]['jeu_description']) ?  utf8_encode($game[0]['jeu_description']):''];
-        $bar['jeu']['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):''];
+        $bar['jeu_titre'] = ['type' => 'text', 'value' => ($game[0]['jeu_titre']) ?  utf8_encode($game[0]['jeu_titre']):''];
+        $bar['jeu_description'] = ['type' => 'text', 'value' => ($game[0]['jeu_description']) ?  utf8_encode($game[0]['jeu_description']):''];
+        $bar['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):''];
         
         $mode = Mode::getInstance()->fetchEntries();
         $bar['mode']['type'] = 'select';
