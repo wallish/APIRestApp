@@ -18,32 +18,29 @@
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse">
 					  	<ul class="nav navbar-nav">
-					    	<li class="active"><a href="#">List</a></li>
-					    	<li><a href="#">Add</a></li>
+					    	<li class="active"><a href="#" id="list">List</a></li>
+					    	<li><a href="#" id="add">Add</a></li>
 					  	</ul>
 					</div>
 				</div>
 			</nav>
 			
 			<div class="content">
-				<div class="list-group">
-				  <!--<a href="#" class="list-group-item active"></a>-->
-				  
-				</div>
+				
 			</div>
 		</div>
 		<script>
 			//getList("/catalogue/jeu[@jeuId=2]");
-			getElements("/catalogue/jeu");
+			
+			//addUpdate();
 
-			$(".list-group").on("click", ".list-group-item", function(){
-				var id = $(this).attr("id");
-				$(this).siblings(".list-group-item").removeClass("active");
-				$(".game-details").hide().remove();
-				$(this).addClass("active");
-				$(this).after("<div class='game-details'></div>").show();
-				getElements("/catalogue/jeu[@jeuId="+id+"]", id);
-			})
+			$(".nav").on("click","li a", function(){
+				var that = $(this);
+				that.parent().siblings().removeClass("active");
+				that.parent().addClass("active");
+				$(".content").load("views/"+that.attr("id")+".html");
+			});
+
 		</script>
 	</body>
 </html>

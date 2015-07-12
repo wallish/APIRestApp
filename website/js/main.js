@@ -1,8 +1,8 @@
 function getElements(path, id) {
 	var datatosend;
-	if(id == undefined) datatosend = {path:path};
-	else datatosend = {path:path, id:id};
-	$.post("xpath.php", datatosend, function(data){
+	if(id == undefined) datatosend = {fnc:"a_xpath",path:path};
+	else datatosend = {fnc:"a_xpath", path:path, id:id};
+	$.post("ajax.php", datatosend, function(data){
 		//$(".content .list-group").html(data);
 		var obj = JSON.parse(data);
 		if(id != undefined) {
@@ -20,4 +20,38 @@ function getElements(path, id) {
 			}
 		}
 	});
+}
+
+function addUpdate(id) {
+	$.ajax({
+	  method: "POST",
+	  url: "ajax.php",
+	  data: {fnc:"a_getForm"},
+	  dataType: "json"
+	})
+  	.done(function( data ) {
+  		var form = "<form>";
+		$.each(data, function(key, value){
+			form += "<div class='form-group'>";
+			form += "<label for='"+key+"'>"+value.label+"</label>";
+			switch(value.type) {
+				case "textarea":
+					form += "<textarea class='form-control' name='"+key+"' id='"+key+"' rows='3'></textarea>";
+					break;
+				case "text":
+					form += "<input class='form-control' name='"+key+"' id='"+key+"' type='text' value='"+value.value+"'>";
+					break;
+				case "select":
+					form += "<select class='form-control' name='"+key+"' id='"+key+"'>";
+					$.each(value.data, function(i, option){
+						form += "<option value='"+option.id+"'>"+option.libelle+"</option>";
+					});
+					form += "</select>";
+					break;
+			}
+			form += "</div>"
+		});
+		form += "</form>";
+		$("#form").html(form);
+  	});
 }

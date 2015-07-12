@@ -16,6 +16,24 @@ class Curl {
 		
 	}
 
+	public function getForm($id = null) {
+		$url = "http://myapi.local:8888/index/getform/id/";
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_FAILONERROR,1);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('HEADERSIGNATURE:'.$this->sig, 'HEADERUSER:'.$this->user, 'HOST:localhost'));
+
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+
+		return $response;
+	}
+
 	public function delete($id){
 		$url = 'http://myapi.local:8888/game/delete/';
 
@@ -26,9 +44,9 @@ class Curl {
 		            );
 
 		// set les options
-		curl_setopt($this->ch, CURLOPT_URL, $url);
-		curl_setopt($this->ch, CURLOPT_TIMEOUT, 10);
-		curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 		curl_setopt($ch, CURLOPT_POST, count($fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
