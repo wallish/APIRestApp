@@ -69,13 +69,14 @@ class IndexController extends Controller
        
         //die(var_dump($gameSupport[0]));
         $bar = [];
-        $bar['jeu_titre'] = ['type' => 'text', 'value' => ($game[0]['jeu_titre']) ?  utf8_encode($game[0]['jeu_titre']):''];
-        $bar['jeu_description'] = ['type' => 'text', 'value' => ($game[0]['jeu_description']) ?  utf8_encode($game[0]['jeu_description']):''];
-        $bar['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):''];
+        $bar['jeu_titre'] = ['type' => 'text', 'value' => ($game[0]['jeu_titre']) ?  utf8_encode($game[0]['jeu_titre']):'', "label" => "Titre du jeu"];
+        $bar['jeu_description'] = ['type' => 'textarea', 'value' => ($game[0]['jeu_description']) ?  utf8_encode($game[0]['jeu_description']):'', "label" => "Description du jeu"];
+        $bar['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):'', "label" => "Siteweb"];
         
         $mode = Mode::getInstance()->fetchEntries();
         $bar['mode']['type'] = 'select';
         $bar['mode']['value'] = ($gameMode[0]['jeu_mode_mode_id']) ? $gameMode[0]['jeu_mode_mode_id']:'';
+        $bar['mode']['label'] = "Mode";
         foreach ($mode as $key => $value) {
             //$bar['mode'][] = ['mode_id' => $value['mode_id'], 'mode_libelle' => $value['mode_libelle']];
             $bar['mode']['data'][] = ['id' => $value['mode_id'], 'libelle' => utf8_encode($value['mode_libelle'])];
@@ -84,6 +85,7 @@ class IndexController extends Controller
         $genre = Genre::getInstance()->fetchEntries();
         $bar['genre']['type'] = 'select';
         $bar['genre']['value'] = ($gameGenre[0]['jeu_genre_genre_id']) ? $gameGenre[0]['jeu_genre_genre_id']:'';
+        $bar['genre']['label'] = "Genre";
         foreach ($genre as $key => $value) {
             $bar['genre']['data'][] = ['id' => $value['genre_id'], 'libelle' => utf8_encode($value['genre_libelle'])];
         }
@@ -91,6 +93,7 @@ class IndexController extends Controller
         $theme = Theme::getInstance()->fetchEntries();
         $bar['theme']['type'] = 'select';
         $bar['theme']['value'] = ($gameTheme[0]['jeu_theme_theme_id']) ? $gameTheme[0]['jeu_theme_theme_id']:'';
+        $bar['theme']['label'] = "Theme";
         foreach ($theme as $key => $value) {
             $bar['theme']['data'][] = ['id' => $value['theme_id'], 'libelle' => utf8_encode($value['theme_libelle'])];
         }
@@ -99,6 +102,7 @@ class IndexController extends Controller
         $support = Support::getInstance()->fetchEntries();
         $bar['support']['type'] = 'select';
         $bar['support']['value'] = ($gameSupport[0]['jeu_support_support_id']) ? $gameSupport[0]['jeu_support_support_id']:'';
+        $bar['support']['label'] = "Support";
         foreach ($support as $key => $value) {
             $bar['support']['data'][] = ['id' => $value['support_id'], 'libelle' => utf8_encode($value['support_libelle'])];
         }
@@ -106,6 +110,7 @@ class IndexController extends Controller
         $editor = Editor::getInstance()->fetchEntries();
         $bar['editeur']['type'] = 'select';
         $bar['editeur']['value'] = ($gameEditor[0]['jeu_editeur_editeur_id']) ? $gameEditor[0]['jeu_editeur_editeur_id']:'';
+        $bar['editeur']['label'] = "Editeur";
         foreach ($editor as $key => $value) {
             $bar['editeur']['data'][] = ['id' => $value['editeur_id'], 'libelle' => utf8_encode($value['editeur_nom'])];
         }
