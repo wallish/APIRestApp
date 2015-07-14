@@ -48,7 +48,6 @@ class MyXMLParser
     public function console($data, $parent, $comment)
     {
         $consoles = $parent->addChild('consoles');
-        
         foreach ($data as $key => $value) {
             $console = $consoles->addChild('console');
             $console->addAttribute('dateSortieJeu', date('Y-m-d',strtotime($value['jeu_console_date_sortie'])));
@@ -63,11 +62,11 @@ class MyXMLParser
            $this->media(null, $console, utf8_encode($value['console_id']), $this->id);
 
             $this->caracteristique(null, $console, utf8_encode($value['console_id']));
-
+            $foo = $console->addChild('commentaires');
             foreach ($comment as $key => $c) { //die(var_dump($c));
                 //die(var_dump($c));
                 if($value['jeu_console_console_id'] == $c['commentaire_jeu_console_console_id'])
-                    $this->commentaire($c, $console);
+                    $this->commentaire($c, $foo );
 
 
             }
@@ -98,9 +97,9 @@ class MyXMLParser
         }
     }
 
-    public function commentaire($data, $parent)
+    public function commentaire($data, $commentaires)
     {
-        $commentaires = $parent->addChild('commentaires');
+        //$commentaires = $parent->addChild('commentaires');
        // $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
        // $data[] =  ['commentaire_utilisateur' => 'BeerFr0mHell', 'commentaire_date' => '2014-11-21', 'commentaire_note' => '18', 'commentaire_contenu' => 'rockstartgames.com'];
         $str = ['commentaire_utilisateur' => 'utilisateur', 'commentaire_date' => 'date', 'commentaire_note' => 'note', 'commentaire_contenu' => 'contenu'];
