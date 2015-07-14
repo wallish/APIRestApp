@@ -49,11 +49,22 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:element name="media">
+<!--	<xsd:element name="media">
 	    <xsd:complexType>
 	        <xsd:attribute name="type" type="xsd:string" />
 	    </xsd:complexType>
 	</xsd:element>
+-->
+
+    <xsd:element name="media">
+      <xsd:complexType>
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:anyURI">
+            <xsd:attribute type="xsd:string" name="type"/>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+    </xsd:element>
 
 	<xsd:element name="medias">
 		<xsd:complexType>

@@ -77,7 +77,7 @@ class MyXMLParser
 
     public function caracteristique($data, $parent, $id)
     {
-        $caracteristique = $parent->addChild('caracteristique');
+        $caracteristique = $parent->addChild('caracteristiques');
 
         $feature = ConsoleFeatures::getInstance()->fetchAll($id);
 
