@@ -45,8 +45,7 @@ function a_xpath(){
 	}
 }
 
-function a_getForm() 
-{
+function a_getForm(){
 	require 'CURL/Curl.php';
 
 	$curl = new Curl("admin","123456789","jhJBbjBOM64S6f");
@@ -55,4 +54,11 @@ function a_getForm()
 
 	echo $fields;
 
+}
+
+function a_post(){
+	require 'CURL/Curl.php';
+	$curl = new Curl("admin","123456789","jhJBbjBOM64S6f");
+	$curl->post();
+	header("Location:/Api-website/");
 }

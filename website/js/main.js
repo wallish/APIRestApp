@@ -30,7 +30,8 @@ function addUpdate(id) {
 	  dataType: "json"
 	})
   	.done(function( data ) {
-  		var form = "<form>";
+  		var form = "<form action='ajax.php' method='post'>";
+  		form += "<input type='hidden' name='fnc' value='a_post' />";
 		$.each(data, function(key, value){
 			form += "<div class='form-group'>";
 			form += "<label for='"+key+"'>"+value.label+"</label>";
@@ -49,8 +50,10 @@ function addUpdate(id) {
 					form += "</select>";
 					break;
 			}
+
 			form += "</div>"
 		});
+		form += "<input type='submit' value='Valider' id='game-post-btn' />";
 		form += "</form>";
 		$("#form").html(form);
   	});
