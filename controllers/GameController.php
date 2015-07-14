@@ -64,7 +64,7 @@ class GameController extends Controller
     { 
         if (Request::isPost()) {
 
-            //die(var_dump(($_POST)));
+            
             $jeuId = "";
             $consoleId = "";
             $resultGame = Game::getInstance()->save($_REQUEST['game'], Game::getInstance()->getTable());
@@ -136,8 +136,6 @@ class GameController extends Controller
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }
-
-        die('GameController/add');
     }
 
    /* public function deleteAction()
@@ -208,7 +206,7 @@ class GameController extends Controller
             header('HTTP/1. 405 Method Not Allowed');
         }
 
-        die('GameController/update');
+        
     }
 
     public function deleteAction()

@@ -10,23 +10,20 @@ class IndexController extends Controller
     public function indexAction()
     {
  
-        Acl::checkAcl();
-        
-        //$game = Game::getInstance()->fetchAll(1);
-        $game = Game::getInstance()->fetchList();
-        die(var_dump($game));
+        /*$game = Game::getInstance()->fetchAll(1);
+        //$game = Game::getInstance()->fetchList();
         $xml = new MyXMLParser();
         //echo $xml->generate($game);
 
         
-        $xmlstring =  $xml->generate($game);
+        $xmlstring =  $xml->generate($game[0]);
         $sxe = simplexml_load_string($xmlstring);
         
         echo $xmlstring;
        
-       
+       */
         $xml = new DOMDocument();
-        $xml->load($xmlstring);
+        $xml->load('http://localhost/apirestapp/game/get/id/1');
         if (!$xml->schemaValidate('XML/jeuxvideo.xsd')) {
             print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
         } else {

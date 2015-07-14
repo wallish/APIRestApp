@@ -21,7 +21,6 @@ class Security
         
 
         if ($sighttp == $sig) {
-
             if(!Acl::checkAcl($user[0]['id'], $_SERVER['REQUEST_METHOD']))
             {
                 header('HTTP/1. 403 Unauthorized');

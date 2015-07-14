@@ -51,10 +51,10 @@ class MyXMLParser
         
         foreach ($data as $key => $value) {
             $console = $consoles->addChild('console');
-            $console->addAttribute('dateSortieJeu', $value['jeu_console_date_sortie']);
+            $console->addAttribute('dateSortieJeu', date('Y-m-d',strtotime($value['jeu_console_date_sortie'])));
             $console->addAttribute('classification', $value['jeu_console_classification']);
             $console->addChild('nomConsole', $value['console_nom']);
-            $console->addChild('dateDeSortie', $value['console_date_sortie']);
+            $console->addChild('dateDeSortie', date('Y-m-d',strtotime($value['console_date_sortie'])));
             $attri = $console->addChild('prixJeu', utf8_encode($value['jeu_console_prix']));
             $attri->addAttribute('devise', '€');
             $attri = $console->addChild('prix', utf8_encode($value['console_prix']));
@@ -110,7 +110,7 @@ class MyXMLParser
             $commentaire->addChild('utilisateur', utf8_encode($data['commentaire_utilisateur']));
             $commentaire->addChild('date', utf8_encode($data['commentaire_date']));
             $commentaire->addChild('note', utf8_encode($data['commentaire_note']));
-            $commentaire->addChild('contenu', "tata");
+            $commentaire->addChild('contenu', utf8_encode($data['commentaire_contenu']));
         //}
             //die(var_dump($commentaires));
     }
@@ -123,11 +123,11 @@ class MyXMLParser
         $data[] =  ['editeur_nom' => 'Take-Two Interctive', 'editeur_annee_creation' => '1993', 'editeur_pays' => 'USA', ' editeur_site_web' => 'take2games.com', 'editeur_fondateur' => 'Ryan Brant'];
         */
 
-        $str = ['editeur_nom' => 'nom', 'editeur_annee_creation' => 'anneeCreation', 'editeur_pays' => 'pays', ' editeur_site_web' => 'sitewebediteur', 'editeur_fondateur' => 'fondateur'];
+        $str = ['editeur_nom' => 'nom', 'editeur_annee_creation' => 'anneeCreation', 'editeur_pays' => 'pays', 'editeur_site_web' => 'sitewebediteur', 'editeur_fondateur' => 'fondateur'];
 
         foreach ($data as $key => $value) {
             $editeur = $editeurs->addChild('editeur');
-            foreach ($value as $key => $pcdata) {
+            foreach ($value as $key => $pcdata) { 
                 if(isset($str[$key]))
                     $editeur->addChild((string) $str[$key], utf8_encode($pcdata));
             }

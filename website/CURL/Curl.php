@@ -119,69 +119,18 @@ class Curl {
 		$ch = curl_init();
 		$url = 'http://myapi.local:8888/game/add/';
 
-
-
 		// set post
 		$fields = array(
-				'game' => array(
-                	'jeu_titre' => $_POST['jeu_titre'],
-                	'jeu_description' => $_POST['jeu_description'],
-                	'jeu_site_web' => $_POST['jeu_siteweb'],
-                ),
-            );
+		                'username' => urlencode('nirun'),
+		                'password' => urlencode('than'),
+		            );
 
-		$to_merge = array(
-			'media' =>  array(
-				'media_url' => 'http://www.jeux-consoles.net/img/9729_mario_sonic.jpg', 
-				'media_media_type_id' => 1
-				),
-			'console' => array(
-				'console_nom' => 'Console Test',
-				'console_date_sortie' => '2013-11-22 00:00:00',
-				'console_prix' => "100"
-				),
-			'caracteristique' => array(
-				'console_nom' => 'Console Test',
-				'console_date_sortie' => '2013-11-22 00:00:00',
-				'console_prix' => "100"
-				),
-			'console_caracteristique' => array(
-				array('console_caracteristique_caracteristique_id' => 1, 'console_caracteristique_valeur' => "static cpu"),
-				array('console_caracteristique_caracteristique_id' => 2, 'console_caracteristique_valeur' => "static gpu"),
-				array('console_caracteristique_caracteristique_id' => 3, 'console_caracteristique_valeur' => "static ram"),
-				array('console_caracteristique_caracteristique_id' => 4, 'console_caracteristique_valeur' => "static kg"),
-				array('console_caracteristique_caracteristique_id' => 5, 'console_caracteristique_valeur' => "static lecteur"),
-				array('console_caracteristique_caracteristique_id' => 6, 'console_caracteristique_valeur' => "static hd"),
-				array('console_caracteristique_caracteristique_id' => 7, 'console_caracteristique_valeur' => "static Bluetooth"),
-				array('console_caracteristique_caracteristique_id' => 8, 'console_caracteristique_valeur' => "static wifi"),
-				array('console_caracteristique_caracteristique_id' => 9, 'console_caracteristique_valeur' => "static usb"),
-				array('console_caracteristique_caracteristique_id' => 10, 'console_caracteristique_valeur' => "static manette"),
-				array('console_caracteristique_caracteristique_id' => 11, 'console_caracteristique_valeur' => "static volt"),
-				array('console_caracteristique_caracteristique_id' => 12, 'console_caracteristique_valeur' => "static go"),
-				),
-			'commentaire' => array(
-				array(
-					'commentaire_utilisateur' => 'static user', 
-					'commentaire_date' => date('Y-m-d'),
-					'commentaire_note' => 18, 
-					'commentaire_contenu' => 'static comment'
-				),
-			),
-			'jeu_console' => array(
-				'jeu_console_date_sortie' => '2015-11-18 00:00:00', 
-				'jeu_console_prix' => '50', 
-				'jeu_console_classification' => '+3'
-				),
-		);
-		$mergeData = array_merge($fields,$to_merge);
-		var_dump($mergeData);
-		exit;
 		// set les options
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 1);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
-		curl_setopt($ch, CURLOPT_POST, count($mergeData));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($mergeData));
+		curl_setopt($ch, CURLOPT_POST, count($fields));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('HEADERSIGNATURE:'.$this->sig, 'HEADERUSER:'.$this->user, 'HOST:localhost'));
 
 		// exec le curl

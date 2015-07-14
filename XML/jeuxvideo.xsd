@@ -167,9 +167,9 @@
 			<xsd:sequence>
 				<xsd:element name="titre" type="xsd:string" />
 				<xsd:element ref="editeurs" />
+				<xsd:element ref="consoles" />
 				<xsd:element name="description" type="xsd:string" />
 				<xsd:element name="siteweb" type="xsd:string" />
-				<xsd:element ref="consoles" />
 				<xsd:element ref="genres" />
 				<xsd:element ref="themes" />
 				<xsd:element ref="supports" />
