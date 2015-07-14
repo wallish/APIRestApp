@@ -69,9 +69,9 @@ class IndexController extends Controller
        
         //die(var_dump($gameSupport[0]));
         $bar = [];
-        $bar['jeu_titre'] = ['type' => 'text', 'value' => ($game[0]['jeu_titre']) ?  utf8_encode($game[0]['jeu_titre']):'', "label" => "Titre du jeu"];
-        $bar['jeu_description'] = ['type' => 'textarea', 'value' => ($game[0]['jeu_description']) ?  utf8_encode($game[0]['jeu_description']):'', "label" => "Description du jeu"];
-        $bar['jeu_siteweb'] = ['type' => 'text', 'value' => ($game[0]['jeu_site_web']) ?  utf8_encode($game[0]['jeu_site_web']):'', "label" => "Siteweb"];
+        $bar['jeu_titre'] = ['type' => 'text', 'value' => (isset($game[0]['jeu_titre'])) ?  utf8_encode($game[0]['jeu_titre']):'', "label" => "Titre du jeu"];
+        $bar['jeu_description'] = ['type' => 'textarea', 'value' => (isset($game[0]['jeu_description'])) ?  utf8_encode($game[0]['jeu_description']):'', "label" => "Description du jeu"];
+        $bar['jeu_siteweb'] = ['type' => 'text', 'value' => (isset($game[0]['jeu_site_web'])) ?  utf8_encode($game[0]['jeu_site_web']):'', "label" => "Siteweb"];
         
         $mode = Mode::getInstance()->fetchEntries();
         $bar['mode']['type'] = 'select';

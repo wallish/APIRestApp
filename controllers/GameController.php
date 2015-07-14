@@ -61,10 +61,10 @@ class GameController extends Controller
     }
 
     public function addAction()
-    {
+    { 
         if (Request::isPost()) {
 
-
+            //die(var_dump(($_POST)));
             $jeuId = "";
             $consoleId = "";
             $resultGame = Game::getInstance()->save($_REQUEST['game'], Game::getInstance()->getTable());
@@ -91,22 +91,42 @@ class GameController extends Controller
             }
 
 
+            if(isset($_REQUEST['mode']['mode_libelle'])){
+                $mode = Mode::getInstance()->save($_REQUEST['mode']['mode_libelle'], Mode::getInstance()->getTable());
+                $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $mode['id'], GameMode::getInstance()->getTable()));
+            } else if (isset($_REQUEST['mode']['mode_id'])){
+                $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $_REQUEST['mode']['mode_id'], GameMode::getInstance()->getTable()));
+            }
+            
+            if(isset($_REQUEST['theme']['theme_libelle'])){
+                $theme = Theme::getInstance()->save($_REQUEST['theme']['theme_libelle'], Mode::getInstance()->getTable());
+                $jeuTheme = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'theme_id' => $theme['id'], GameTheme::getInstance()->getTable()));
+            } else if (isset($_REQUEST['theme']['theme_id'])){
+                $jeuTheme = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'theme_id' => $_REQUEST['theme']['theme_id'], GameTheme::getInstance()->getTable()));
+            }
 
-            $mode = Mode::getInstance()->save($_REQUEST['mode']['mode_libelle'], Mode::getInstance()->getTable());
-            $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $mode['id'], GameMode::getInstance()->getTable()));
-            
-            $theme = Theme::getInstance()->save($_REQUEST['theme']['theme_libelle'], Mode::getInstance()->getTable());
-            $jeuTheme = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'theme_id' => $theme['id'], GameTheme::getInstance()->getTable()));
-            
-            $editor = Editor::getInstance()->save($_REQUEST['editor']['editor_libelle'], Mode::getInstance()->getTable());
-            $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $editor['id'], GameEditor::getInstance()->getTable()));
-            
-            $genre = Genre::getInstance()->save($_REQUEST['genre']['genre_libelle'], Mode::getInstance()->getTable());
-            $jeuGenre = GameGenre::getInstance()->save(array('jeu_id' => $jeuId,'genre_id' => $genre['id'], GameGenre::getInstance()->getTable()));
-            
-            $support = Support::getInstance()->save($_REQUEST['support']['support_libelle'], Mode::getInstance()->getTable());
-            $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $support['id'], GameSupport::getInstance()->getTable()));
-            
+            if(isset($_REQUEST['editeur']['editeur_libelle'])){
+                $editor = Editor::getInstance()->save($_REQUEST['editeur']['editeur_libelle'], Mode::getInstance()->getTable());
+                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $editor['id'], GameEditor::getInstance()->getTable()));
+            } else if (isset($_REQUEST['editeur']['editeur_id'])){
+                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $_REQUEST['editeur']['editeur_id'], GameEditor::getInstance()->getTable()));
+
+            }
+
+            if(isset($_REQUEST['genre']['genre_libelle'])){
+                $genre = Genre::getInstance()->save($_REQUEST['genre']['genre_libelle'], Mode::getInstance()->getTable());
+                $jeuGenre = GameGenre::getInstance()->save(array('jeu_id' => $jeuId,'genre_id' => $genre['id'], GameGenre::getInstance()->getTable()));
+            } else if (isset($_REQUEST['genre']['genre_id'])){
+                $jeuGenre = GameGenre::getInstance()->save(array('jeu_id' => $jeuId,'genre_id' => $_REQUEST['genre']['genre_id'], GameGenre::getInstance()->getTable()));
+
+            }
+
+            if(isset($_REQUEST['support']['support_libelle'])){
+                $support = Support::getInstance()->save($_REQUEST['support']['support_libelle'], Mode::getInstance()->getTable());
+                $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $support['id'], GameSupport::getInstance()->getTable()));
+            } else if (isset($_REQUEST['support']['support_id'])){
+                $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $_REQUEST['support']['support_id'], GameSupport::getInstance()->getTable()));
+            }
 
 
                die(var_dump($resultGame));
@@ -138,8 +158,52 @@ class GameController extends Controller
         if (Request::isPut()) {
             header('HTTP/1. 200 OK');
             parse_str(file_get_contents('php://input'), $post_content);
-            var_dump($put_content);
-            $result = Game::getInstance()->save($post_content, Game::getInstance()->getTable());
+            //var_dump($put_content);
+            //$result = Game::getInstance()->save($post_content, Game::getInstance()->getTable());
+
+
+            $jeuId = $post_content['game']['jeu_id'];
+            $resultGame = Game::getInstance()->save($post_content['game'], Game::getInstance()->getTable());
+
+
+            if(isset($post_content['mode']['mode_libelle'])){
+                $mode = Mode::getInstance()->save($post_content['mode']['mode_libelle'], Mode::getInstance()->getTable());
+                $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $mode['id'], GameMode::getInstance()->getTable()));
+            } else if (isset($post_content['mode']['mode_id'])){
+                $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $post_content['mode']['mode_id'], GameMode::getInstance()->getTable()));
+            }
+            
+            if(isset($post_content['theme']['theme_libelle'])){
+                $theme = Theme::getInstance()->save($post_content['theme']['theme_libelle'], Mode::getInstance()->getTable());
+                $jeuTheme = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'theme_id' => $theme['id'], GameTheme::getInstance()->getTable()));
+            } else if (isset($post_content['theme']['theme_id'])){
+                $jeuTheme = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'theme_id' => $post_content['theme']['theme_id'], GameTheme::getInstance()->getTable()));
+            }
+
+            if(isset($post_content['editeur']['editeur_libelle'])){
+                $editor = Editor::getInstance()->save($post_content['editeur']['editeur_libelle'], Mode::getInstance()->getTable());
+                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $editor['id'], GameEditor::getInstance()->getTable()));
+            } else if (isset($post_content['editeur']['editeur_id'])){
+                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $post_content['editeur']['editeur_id'], GameEditor::getInstance()->getTable()));
+
+            }
+
+            if(isset($post_content['genre']['genre_libelle'])){
+                $genre = Genre::getInstance()->save($post_content['genre']['genre_libelle'], Mode::getInstance()->getTable());
+                $jeuGenre = GameGenre::getInstance()->save(array('jeu_id' => $jeuId,'genre_id' => $genre['id'], GameGenre::getInstance()->getTable()));
+            } else if (isset($post_content['genre']['genre_id'])){
+                $jeuGenre = GameGenre::getInstance()->save(array('jeu_id' => $jeuId,'genre_id' => $post_content['genre']['genre_id'], GameGenre::getInstance()->getTable()));
+
+            }
+
+            if(isset($post_content['support']['support_libelle'])){
+                $support = Support::getInstance()->save($post_content['support']['support_libelle'], Mode::getInstance()->getTable());
+                $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $support['id'], GameSupport::getInstance()->getTable()));
+            } else if (isset($post_content['support']['support_id'])){
+                $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $post_content['support']['support_id'], GameSupport::getInstance()->getTable()));
+            }
+
+
         } else {
             header('HTTP/1. 405 Method Not Allowed');
         }
