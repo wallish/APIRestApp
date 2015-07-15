@@ -69,7 +69,7 @@ class Model extends Database
         $queryData = implode("', '", array_values($data));
 
         foreach ($data as $key => $value) {
-            $querySet .= $key."='".addslashes($value)."',";
+            $querySet .= $key."='".utf8_decode(addslashes($value))."',";
         }
 
         $query = 'UPDATE '.$table.' SET '.substr($querySet, 0, -1)." WHERE jeu_id='".$data['jeu_id']."'";

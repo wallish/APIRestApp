@@ -1,3 +1,5 @@
 .main { width:900px; margin:auto; padding:10px 0;}
-.game-details {min-height:200px; border:1px solid #ddd; border-top:none;padding:5px;}
+.game-details {min-height:200px; overflow:hidden; border:1px solid #ddd; border-top:none;padding:5px;}
 .game-details img {margin-right:5px;}
+
+.game-details .cover-price {text-align: center;}

@@ -25,17 +25,23 @@ function a_xpath(){
 		$results = $xml->xpath($path);	
 		
 		//echo print_r($results, true);
+		//exit;
 		$response = array();
 		foreach ($results as $result) {
 			if(!isset($_POST["id"]))
 				$response[] = array("id" => (string) $result->attributes()["jeuId"], "titre"=> (string) $result->{"titre"});
 			else {
-				$consoles = $jaquettes = array();
+				$consoles = $jaquettes = $commentaires = array();
 				foreach($result->consoles->console as $console){
 					$consoles[] = (string) $console->nomConsole;
-					$jaquettes[] = (string) $console->medias->media;
+					$jaquettes[] = array("jaquette" => (string) stripslashes($console->medias->media), "prix" => (string) $console->prixJeu);
+					foreach($console->commentaires->commentaire as $commentaire){
+						$commentaires[] = $commentaire;	
+					}
+					
+
 				}
-				$response[] = array( "titre"=> (string) $result->{"titre"}, "consoles" => $consoles, "jaquettes" => $jaquettes, "description" => (string) $result->description);	
+				$response[] = array("id" => (string) $result->attributes()["jeuId"], "titre"=> (string) $result->{"titre"}, "consoles" => $consoles, "jaquettes" => $jaquettes, "description" => (string) $result->description, "commentaires" => $commentaires);	
 			}
 				
 			//$reponse[] = $result->{'titre'};
@@ -45,12 +51,19 @@ function a_xpath(){
 	}
 }
 
+function a_delete(){
+	require 'CURL/Curl.php';
+	$curl = new Curl("admin","123456789","jhJBbjBOM64S6f");
+	$curl->delete($_POST["id"]);
+}
+
 function a_getForm(){
 	require 'CURL/Curl.php';
 
 	$curl = new Curl("admin","123456789","jhJBbjBOM64S6f");
 
-	$fields = $curl->getForm();
+	$id = isset($_POST["id"]) ? $_POST["id"] : null;
+	$fields = $curl->getForm($id);
 
 	echo $fields;
 
@@ -60,5 +73,11 @@ function a_post(){
 	require 'CURL/Curl.php';
 	$curl = new Curl("admin","123456789","jhJBbjBOM64S6f");
 	$curl->post();
-	header("Location:/Api-website/");
+
+}
+
+function a_put(){
+	require 'CURL/Curl.php';
+	$curl = new Curl("admin","123456789","jhJBbjBOM64S6f");
+	$curl->put();	
 }

@@ -6,10 +6,16 @@
 	getElements("/catalogue/jeu");
 	$(".list-group").on("click", ".list-group-item", function(){
 		var id = $(this).attr("id");
-		$(this).siblings(".list-group-item").removeClass("active");
-		$(".game-details").hide().remove();
-		$(this).addClass("active");
-		$(this).after("<div class='game-details'></div>").show();
-		getElements("/catalogue/jeu[@jeuId="+id+"]", id);
+		if($(this).hasClass("active")) {
+			$(this).removeClass("active");
+			$(".game-details").hide().remove();
+		} else {
+			$(this).siblings(".list-group-item").removeClass("active");
+			$(".game-details").hide().remove();
+			$(this).addClass("active");
+			$(this).after("<div class='game-details'></div>").show();
+			getElements("/catalogue/jeu[@jeuId="+id+"]", id);
+			$(".game-details").outerHeight($("#game-details").outerHeight());
+		}
 	})
 </script>

@@ -6,10 +6,12 @@
 		<link href="css/bootstrap-theme.min.css" rel="stylesheet" />
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
 		<link href="css/main.css" rel="stylesheet" />
+		<link href="css/bootstrap-dialog.css" rel="stylesheet" />
 
 		<script src="js/jquery.min.js" ></script>
 		<script src="js/bootstrap.min.js" ></script>
 		<script src="js/main.js" ></script>
+		<script src="js/bootstrap-dialog.js"></script>
 
 	</head>	
 	<body>
@@ -35,11 +37,14 @@
 			//addUpdate();
 
 			$(".nav").on("click","li a", function(){
+				
 				var that = $(this);
 				that.parent().siblings().removeClass("active");
 				that.parent().addClass("active");
 				$(".content").load("views/"+that.attr("id")+".html");
 			});
+
+
 
 		</script>
 	</body>

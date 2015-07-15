@@ -164,7 +164,7 @@ class GameController extends Controller
             $jeuId = $post_content['game']['jeu_id'];
             $post_content['game']['id'] =  $post_content['game']['jeu_id'];
             $resultGame = Game::getInstance()->save($post_content['game'], Game::getInstance()->getTable());
-
+            //var_dump($resultGame);
 
             if(isset($post_content['mode']['mode_libelle'])){
                 $mode = Mode::getInstance()->save($post_content['mode']['mode_libelle'], Mode::getInstance()->getTable());
