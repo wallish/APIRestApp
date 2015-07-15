@@ -108,9 +108,9 @@ class GameController extends Controller
 
             if(isset($_REQUEST['editeur']['editeur_libelle'])){
                 $editor = Editor::getInstance()->save($_REQUEST['editeur']['editeur_libelle'], Mode::getInstance()->getTable());
-                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $editor['id'], GameEditor::getInstance()->getTable()));
+                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editeur_id' => $editor['id'], GameEditor::getInstance()->getTable()));
             } else if (isset($_REQUEST['editeur']['editeur_id'])){
-                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editor_id' => $_REQUEST['editeur']['editeur_id'], GameEditor::getInstance()->getTable()));
+                $jeuEditor = GameTheme::getInstance()->save(array('jeu_id' => $jeuId,'editeur_id' => $_REQUEST['editeur']['editeur_id'], GameEditor::getInstance()->getTable()));
 
             }
 
@@ -162,6 +162,10 @@ class GameController extends Controller
 
 
             $jeuId = $post_content['game']['jeu_id'];
+            if(!is_numeric($jeuId)){
+                header('HTTP/1.1 409 Conflict');
+                die("Erreur l'id n'est pas numérique");
+            }
             $post_content['game']['id'] =  $post_content['game']['jeu_id'];
             $resultGame = Game::getInstance()->save($post_content['game'], Game::getInstance()->getTable());
             //var_dump($resultGame);
