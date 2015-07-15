@@ -162,6 +162,7 @@ class GameController extends Controller
 
 
             $jeuId = $post_content['game']['jeu_id'];
+            $post_content['game']['id'] =  $post_content['game']['jeu_id'];
             $resultGame = Game::getInstance()->save($post_content['game'], Game::getInstance()->getTable());
 
 
