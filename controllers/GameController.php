@@ -129,7 +129,7 @@ class GameController extends Controller
             }
 
 
-               die(var_dump($resultGame));
+            //die(var_dump($resultGame));
             if ($result['code'] = 1) {
                 header('HTTP/1.1 201 Created');
             }
