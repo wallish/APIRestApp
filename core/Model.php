@@ -72,7 +72,7 @@ class Model extends Database
             $querySet .= $key."='".$value."',";
         }
 
-        $query = 'UPDATE '.$table.' SET '.substr($querySet, 0, -1)." WHERE id='".$data['id']."'";
+        $query = 'UPDATE '.$table.' SET '.substr($querySet, 0, -1)." WHERE jeu_id='".$data['id']."'";
 
         try {
             $reponse = $this->getAdapter()->prepare($query);
