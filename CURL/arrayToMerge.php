@@ -42,4 +42,9 @@ $to_merge = array(
 		'jeu_console_prix' => '50', 
 		'jeu_console_classification' => '+3'
 		),
+	'mode' => array('mode_id' => 1),
+	'editeur' => array('editeur_id' => 1),
+	'theme' => array('theme_id' => 1),
+	'support' => array('support_id' => 1),
+	'genre' => array('genre_id' => 1),
 );
