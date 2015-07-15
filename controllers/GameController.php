@@ -28,6 +28,8 @@ class GameController extends Controller
         if (Request::isGet()) {
             //$result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
             //die(var_dump($args));
+            header('HTTP/1.1 200 OK');
+            
            
             if($args[0] == 'id' && $args[1] != "")
             {
@@ -52,7 +54,6 @@ class GameController extends Controller
                 header ("Content-Type:text/xml; charset=utf-8");
                 echo $foo.$final_xml;
             }
-            header('HTTP/1.1 200 OK');
 
         } else {
             header('HTTP/1.1 405 Method Not Allowed');
