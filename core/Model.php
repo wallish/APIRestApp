@@ -72,16 +72,16 @@ class Model extends Database
             $querySet .= $key."='".addslashes($value)."',";
         }
 
-        $query = 'UPDATE '.$table.' SET '.substr($querySet, 0, -1)." WHERE jeu_id='".$data['id']."'";
+        $query = 'UPDATE '.$table.' SET '.substr($querySet, 0, -1)." WHERE jeu_id='".$data['jeu_id']."'";
 
         try {
             $reponse = $this->getAdapter()->prepare($query);
             $reponse->execute();
-            $result = ['code' => DB_SUCCESS_UPDATE, 'id' => $data['id'], 'message' => []];
+            $result = ['code' => DB_SUCCESS_UPDATE, 'jeu_id' => $data['jeu_id'], 'message' => []];
         } catch (PDOException $e) {
             echo 'Error'.$e->getMessage();
             echo $query;
-            $result = ['code' => -1, 'id' => $data['id'], 'message' => $e->getMessage()];
+            $result = ['code' => -1, 'jeu_id' => $data['jeu_id'], 'message' => $e->getMessage()];
         }
 
         return $result;
