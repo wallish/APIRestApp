@@ -23,7 +23,7 @@ class IndexController extends Controller
        
        */
         $xml = new DOMDocument();
-        $xml->load('http://localhost/apirestapp/game/get/id/1');
+        $xml->load('http://localhost/apirestapp/game/get/id/');
         if (!$xml->schemaValidate('XML/jeuxvideo.xsd')) {
             print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
         } else {
