@@ -26,7 +26,6 @@ class GameController extends Controller
     public function getAction($args)
     { 
         if (Request::isGet()) {
-            header('HTTP/1. 200 OK');
             //$result = Game::getInstance()->save($_REQUEST, Game::getInstance()->getTable());
             //die(var_dump($args));
            
@@ -53,9 +52,10 @@ class GameController extends Controller
                 header ("Content-Type:text/xml; charset=utf-8");
                 echo $foo.$final_xml;
             }
+            header('HTTP/1.1 200 OK');
 
         } else {
-            header('HTTP/1. 405 Method Not Allowed');
+            header('HTTP/1.1 405 Method Not Allowed');
         }
 
     }
@@ -131,10 +131,10 @@ class GameController extends Controller
 
                die(var_dump($resultGame));
             if ($result['code'] = 1) {
-                header('HTTP/1. 201 Created');
+                header('HTTP/1.1 201 Created');
             }
         } else {
-            header('HTTP/1. 405 Method Not Allowed');
+            header('HTTP/1.1 405 Method Not Allowed');
         }
     }
 
@@ -154,7 +154,7 @@ class GameController extends Controller
     public function updateAction()
     {
         if (Request::isPut()) {
-            header('HTTP/1. 200 OK');
+            
             parse_str(file_get_contents('php://input'), $post_content);
             //var_dump($put_content);
             //$result = Game::getInstance()->save($post_content, Game::getInstance()->getTable());
@@ -201,9 +201,9 @@ class GameController extends Controller
                 $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $post_content['support']['support_id'], GameSupport::getInstance()->getTable()));
             }
 
-
+            header('HTTP/1.1 200 OK');
         } else {
-            header('HTTP/1. 405 Method Not Allowed');
+            header('HTTP/1.1 405 Method Not Allowed');
         }
 
         
@@ -213,13 +213,14 @@ class GameController extends Controller
     {
         if (Request::isDelete()) {
            // header('HTTP/1. 204 No Content');
+
             parse_str(file_get_contents('php://input'), $post_content);
 
             $result = Game::getInstance()->desactivate($post_content['id'], Game::getInstance()->getTable());
-
+            header('HTTP/1.1 204 OK');
             //var_dump($put_content);
         } else {
-            header('HTTP/1. 405 Method Not Allowed');
+            header('HTTP/1.1 405 Method Not Allowed');
         }
     }
 }
