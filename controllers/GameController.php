@@ -35,9 +35,26 @@ class GameController extends Controller
             {
                 $game = Game::getInstance()->fetchAll($args[1]);
                 if(!empty($game)){
+      
+
                     $xml = new MyXMLParser();
                     $outputXML=str_replace('<?xml version="1.0"?>', '<?xml version="1.0" encoding="UTF-8"?>', $xml->generate($game[0]));
+                    
+
+                    $time = time();
+                    file_put_contents('tmp/'.$time.'.xml', $outputXML);
+
+                    $xml = new DOMDocument();
+                    $xml->load('tmp/'.$time.'.xml');
+                    if (!$xml->schemaValidate('XML/jeuxvideo.xsd')) {
+                        print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
+                        die();
+                    } 
+
+
                     echo $outputXML;
+
+
 
                 } else {
                     die('error');
@@ -53,6 +70,16 @@ class GameController extends Controller
                 $foo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
                 header ("Content-Type:text/xml; charset=utf-8");
                 echo $foo.$final_xml;
+
+                $time = time();
+                file_put_contents('tmp/'.$time.'.xml', $foo.$final_xml);
+
+                $xml = new DOMDocument();
+                $xml->load('tmp/'.$time.'.xml');
+                if (!$xml->schemaValidate('XML/jeuxvideo.xsd')) {
+                    print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
+                    die();
+                } 
             }
 
         } else {
@@ -65,7 +92,7 @@ class GameController extends Controller
     { 
         if (Request::isPost()) {
 
-            
+            //die(var_dump($_POST));
             $jeuId = "";
             $consoleId = "";
             $resultGame = Game::getInstance()->save($_REQUEST['game'], Game::getInstance()->getTable());
@@ -90,12 +117,24 @@ class GameController extends Controller
                 $value['commentaire_jeu_console_console_id'] = (int)$consoleId;
                 $resultCommentaire = Comment::getInstance()->save($value, Comment::getInstance()->getTable());
             }
+            $_REQUEST['media']['media_jeu_console_jeu_id'] = $jeuId;
+            $_REQUEST['media']['media_jeu_console_console_id'] = $consoleId;
+            $resultMedia = Media::getInstance()->save($_REQUEST['media'], Media::getInstance()->getTable());
 
+            $jeuMode = GameMode::getInstance()->save(array('jeu_mode_jeu_id' => $jeuId,'jeu_mode_mode_id' => $_REQUEST['mode']['mode_id']), GameMode::getInstance()->getTable());
+            
+            $jeuTheme = GameTheme::getInstance()->save(array('jeu_theme_jeu_id' => $jeuId,'jeu_theme_theme_id' => $_REQUEST['theme']['theme_id']), GameTheme::getInstance()->getTable());
 
+            $jeuEditor = GameTheme::getInstance()->save(array('jeu_editeur_jeu_id' => $jeuId,'jeu_editeur_editeur_id' => $_REQUEST['editeur']['editeur_id']), GameEditor::getInstance()->getTable());
+
+            $jeuGenre = GameGenre::getInstance()->save(array('jeu_genre_jeu_id' => $jeuId,'jeu_genre_genre_id' => $_REQUEST['genre']['genre_id']), GameGenre::getInstance()->getTable());
+
+            $jeuSupport = GameSupport::getInstance()->save(array('jeu_support_jeu_id' => $jeuId,'jeu_support_support_id' => $_REQUEST['support']['support_id']), GameSupport::getInstance()->getTable());
+/*
             if(isset($_REQUEST['mode']['mode_libelle'])){
                 $mode = Mode::getInstance()->save($_REQUEST['mode']['mode_libelle'], Mode::getInstance()->getTable());
                 $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $mode['id'], GameMode::getInstance()->getTable()));
-            } else if (isset($_REQUEST['mode']['mode_id'])){
+            } else if (isset($_REQUEST['mode']['mode_id'])){ die('ok');
                 $jeuMode = GameMode::getInstance()->save(array('jeu_id' => $jeuId,'mode_id' => $_REQUEST['mode']['mode_id'], GameMode::getInstance()->getTable()));
             }
             
@@ -129,7 +168,7 @@ class GameController extends Controller
                 $jeuSupport = GameSupport::getInstance()->save(array('jeu_id' => $jeuId,'support_id' => $_REQUEST['support']['support_id'], GameSupport::getInstance()->getTable()));
             }
 
-
+*/
             //die(var_dump($resultGame));
             if ($result['code'] = 1) {
                 header('HTTP/1.1 201 Created');
