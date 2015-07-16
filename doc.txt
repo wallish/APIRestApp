@@ -1,0 +1,68 @@
+## DOCUMENTATION ##
+
+
+AUTHENTIFICATION
+----------------
+
+$user = {user};
+$api = '1234567889';
+$api_secret = {api_secret};
+
+$sig = hash_hmac('sha256', $user.$api_secret, $api);
+
+
+POST
+----
+url = "http://monapi.com/game/add/"
+
+format :
+
+{
+  "game": {
+    "jeu_titre": "sf4",
+    "jeu_description": "jeu de combat",
+    "jeu_site_web": "www.foo.com"
+  }
+}
+
+UPDATE
+------
+
+url = "http://monapi.com/game/update/"
+format :
+
+{
+  "game": {
+    "jeu_id": "1",
+    "jeu_titre": "sf4",
+    "jeu_description": "jeu de combat",
+    "jeu_site_web": "www.foo.com"
+  }
+}
+
+DELETE
+------
+
+url = "http://monapi.com/game/delete/"
+format :
+
+{
+	"id": "1",
+}
+
+GET
+------
+
+url de tous les jeux = "http://monapi.com/game/get/id/"
+url d'un jeu = "http://monapi.com/game/get/id/{id}"
+
+retourne un xml
+
+GET FORM
+--------
+formulaire vide = "http://monapi.com/index/getform/id/"
+formulaire d'une jeu pour update = "http://monapi.com/index/getform/id/{id}"
+
+retourne le formulaire en json
+
+
